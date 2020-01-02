@@ -17,7 +17,7 @@ defmodule BulmaTimeWeb.Router do
   scope "/", BulmaTimeWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", Live
   end
 
   # Other scopes may use custom stacks.
