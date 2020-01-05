@@ -2,7 +2,7 @@ defmodule BulmaTimeWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :bulma_time
 
   socket "/socket", BulmaTimeWeb.UserSocket,
-    websocket: true,
+    websocket: [timeout: 45_000],
     longpoll: false
 
   socket "/live", Phoenix.LiveView.Socket
