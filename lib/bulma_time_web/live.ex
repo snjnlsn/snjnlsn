@@ -4,6 +4,7 @@ defmodule Button do
   property(click, :event)
   property(kind, :string, default: "is-info")
 
+
   def render(assigns) do
     ~H"""
     <button class="button {{ @kind }}" phx-click={{ @click }} style="margin: 0px 5px">
@@ -23,18 +24,11 @@ defmodule Modal do
   def render(assigns) do
     ~H"""
       <div class={{"modal", isActive: @show }}>
-        <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">Hello</p>
-          </header>
-          <section class="modal-card-body">
-            {{ @inner_content.() }}
-          </section>
-          <footer class="modal-card-foot" style="justify-content: flex-end">
-            <Button click="hide">Ok</Button>
-          </footer>
+        <div class="modal-content">
+          {{ @inner_content.() }}
         </div>
+        <div class="modal-background"></div>
+        <Button css_class="test" click="hide">im done</Button>
       </div>
     """
   end
