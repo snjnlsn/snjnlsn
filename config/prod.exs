@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :bulma_time, BulmaTimeWeb.Endpoint,
-  url: [scheme: "https", host: "obscure-ocean-66558.herokuapp.com", port: 443],
+  url: [scheme: "https", host: "vascular-brussel-aim7wjab4imu5lkb51t3rj7o.herokudns.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
