@@ -14,10 +14,18 @@ defmodule BulmaTimeWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipe_through :browser
+
   scope "/", BulmaTimeWeb do
-    pipe_through :browser
+    pipe_through BulmaTimeWeb.Plugs.SpotifyAuth
 
     live "/", Live
+    get "/playlists", PlaylistController, :index
+  end
+
+  scope "/", BulmaTimeWeb do
+    get "/authenticate", SpotifyController, :authenticate
+    get "/authorize", SpotifyControler, :authorize
   end
 
   # Other scopes may use custom stacks.

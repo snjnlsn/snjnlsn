@@ -3,6 +3,7 @@ defmodule BulmaTimeWeb.Live do
   alias BulmaTimeWeb.Modal
   alias BulmaTimeWeb.Button
   alias BulmaTimeWeb.AOTY
+  require IEx
 
   # property :albums,  [
   #   "https://via.placeholder.com/420",
@@ -12,9 +13,10 @@ defmodule BulmaTimeWeb.Live do
   # ]
 
   def render(assigns) do
+    # IEx.pry
     ~H"""
     <Modal id="modal">
-      Haha Modal!
+    Haha Modal!
     </Modal>
     <AOTY id="idk" album_images={{[
       "http://placekitten.com/g/480/480",

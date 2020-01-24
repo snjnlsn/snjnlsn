@@ -1,7 +1,7 @@
 defmodule BulmaTimeWeb.AOTY do
   use Surface.LiveComponent
 
-  property album_images, :list
+  property(album_images, :list)
 
   def mount(socket) do
     {:ok, assign(socket, show: false)}
