@@ -26,4 +26,3 @@ defmodule BulmaTimeWeb.Modal do
     {:noreply, assign(socket, show: false)}
   end
 end
-
