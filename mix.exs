@@ -46,7 +46,7 @@ defmodule BulmaTime.MixProject do
       {:phoenix_live_view, "~> 0.4.0", override: true},
       {:floki, ">= 0.0.0", only: :test},
       {:surface, git: "https://github.com/msaraiva/surface.git"},
-      {:spotify_ex, "~> 2.0.9"}
+      {:spotify_ex, github: "sanjaynelson/spotify_ex", branch: "add_refresh_token"}
     ]
   end
 

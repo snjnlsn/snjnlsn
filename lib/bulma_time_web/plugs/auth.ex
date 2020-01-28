@@ -5,7 +5,6 @@ defmodule BulmaTimeWeb.Plugs.SpotifyAuth do
 
   def call(conn, _default) do
     unless Spotify.Authentication.authenticated?(conn) do
-      conn = put_session(conn, :sessionk, 'hi')
       Phoenix.Controller.redirect(conn, external: Spotify.Authorization.url())
     else
       conn
