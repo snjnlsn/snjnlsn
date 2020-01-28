@@ -41,10 +41,7 @@ defmodule BulmaTimeWeb do
       use Phoenix.HTML
 
       # copied from LiveView installation guide
-      import Phoenix.LiveView
-
-      # installing surface
-      import Surface
+      import Phoenix.LiveView.Helpers
 
       import BulmaTimeWeb.ErrorHelpers
       import BulmaTimeWeb.Gettext

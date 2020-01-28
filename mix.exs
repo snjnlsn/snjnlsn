@@ -20,7 +20,7 @@ defmodule BulmaTime.MixProject do
   def application do
     [
       mod: {BulmaTime.Application, []},
-      extra_applications: [:logger, :runtime_tools, :spotify_ex]
+      extra_applications: [:logger, :runtime_tools, :spotify_ex, :phoenix_pubsub]
     ]
   end
 
@@ -43,9 +43,8 @@ defmodule BulmaTime.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:phoenix_live_view, "~> 0.4.0", override: true},
+      {:phoenix_live_view, "~> 0.6.0", override: true},
       {:floki, ">= 0.0.0", only: :test},
-      {:surface, git: "https://github.com/msaraiva/surface.git"},
       {:spotify_ex, github: "sanjaynelson/spotify_ex", branch: "add_refresh_token"}
     ]
   end

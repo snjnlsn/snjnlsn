@@ -1,9 +1,9 @@
 defmodule BulmaTimeWeb.Playlist do
-  use Surface.LiveView
+  use Phoenix.LiveView
   require IEx
   require Logger
 
-  def mount(session, socket) do
+  def mount(_params, session, socket) do
     %{:spotify_auth => auth} = session
     %{:access_token => token, :refresh_token => refresh_token} = auth
     Logger.info("token: #{token}, refresh_token: #{refresh_token}")
@@ -12,7 +12,7 @@ defmodule BulmaTimeWeb.Playlist do
 
   def render(assigns) do
     # IEx.pry
-    ~H"""
+    ~L"""
       <div>
         <p>hello mofo</p>
       </div>
