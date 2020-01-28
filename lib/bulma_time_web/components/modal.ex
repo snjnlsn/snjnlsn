@@ -1,20 +1,26 @@
 defmodule BulmaTimeWeb.Modal do
   alias BulmaTimeWeb.Button
-  use Surface.LiveComponent
+  use Phoenix.LiveComponent
 
-  def mount(socket) do
+  def mount(_, _, socket) do
     {:ok, assign(socket, show: false)}
   end
 
+  # def render(assigns) do
+  #   ~H"""
+  #     <div class={{"modal", isActive: @show }}>
+  #       <div class="modal-content">
+  #         {{ @inner_content.() }}
+  #       </div>
+  #       <div class="modal-background"></div>
+  #       <Button click="hide">im done</Button>
+  #     </div>
+  #   """
+  # end
+
   def render(assigns) do
-    ~H"""
-      <div class={{"modal", isActive: @show }}>
-        <div class="modal-content">
-          {{ @inner_content.() }}
-        </div>
-        <div class="modal-background"></div>
-        <Button click="hide">im done</Button>
-      </div>
+    ~L"""
+    <p>hello</p>
     """
   end
 

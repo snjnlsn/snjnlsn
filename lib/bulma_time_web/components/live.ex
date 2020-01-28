@@ -1,9 +1,13 @@
 defmodule BulmaTimeWeb.Live do
-  use Surface.LiveView
+  use Phoenix.LiveView
   alias BulmaTimeWeb.Modal
   alias BulmaTimeWeb.Button
   alias BulmaTimeWeb.AOTY
   require IEx
+
+  def mount(_, _, socket) do
+    socket
+  end
 
   # property :albums,  [
   #   "https://via.placeholder.com/420",
@@ -12,21 +16,27 @@ defmodule BulmaTimeWeb.Live do
   #   "https://via.placeholder.com/420"
   # ]
 
+  # def render(assigns) do
+  #   # IEx.pry
+  #   ~H"""
+  #   <Modal id="modal">
+  #   Haha Modal!
+  #   </Modal>
+  #   <AOTY id="idk" album_images={{[
+  #     "http://placekitten.com/g/480/480",
+  #     "http://placekitten.com/g/480/480",
+  #     "http://placekitten.com/g/480/480",
+  #     "http://placekitten.com/g/480/480"
+  #   ]}} />
+  #   <Button click="show">
+  #     Modal!
+  #   </Button>
+  #   """
+  # end
+
   def render(assigns) do
-    # IEx.pry
-    ~H"""
-    <Modal id="modal">
-    Haha Modal!
-    </Modal>
-    <AOTY id="idk" album_images={{[
-      "http://placekitten.com/g/480/480",
-      "http://placekitten.com/g/480/480",
-      "http://placekitten.com/g/480/480",
-      "http://placekitten.com/g/480/480"
-    ]}} />
-    <Button click="show">
-      Modal!
-    </Button>
+    ~L"""
+      <div></div>
     """
   end
 

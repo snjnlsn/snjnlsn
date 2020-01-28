@@ -1,11 +1,17 @@
 defmodule BulmaTimeWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :bulma_time
 
+  @session_options [
+    store: :cookie,
+    key: "_bulma_time_key",
+    signing_salt: "8uvGCkk0"
+  ]
+
   socket "/socket", BulmaTimeWeb.UserSocket,
     websocket: [timeout: 45_000],
     longpoll: false
 
-  socket "/live", Phoenix.LiveView.Socket
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -39,10 +45,7 @@ defmodule BulmaTimeWeb.Endpoint do
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
-  plug Plug.Session,
-    store: :cookie,
-    key: "_bulma_time_key",
-    signing_salt: "8uvGCkk0"
+  plug Plug.Session, @session_options
 
   plug BulmaTimeWeb.Router
 end
