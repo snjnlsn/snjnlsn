@@ -6,7 +6,7 @@ defmodule BulmaTimeWeb.Live do
   require IEx
 
   def mount(_, _, socket) do
-    socket
+    {:ok, socket}
   end
 
   # property :albums,  [
