@@ -19,14 +19,14 @@ defmodule BulmaTimeWeb.Router do
   scope "/", BulmaTimeWeb do
     pipe_through BulmaTimeWeb.Plugs.SpotifyAuth
 
-    live "/", Live
     # required to give live views access to playlists
-    live "/playlists", Playlist, session: [:spotify_auth]
+    live "/playlists", Playlist
   end
 
   scope "/", BulmaTimeWeb do
+    live "/", Live
     get "/authenticate", SpotifyController, :authenticate
-    get "/authorize", SpotifyControler, :authorize
+    get "/authorize", SpotifyController, :authorize
     get "/refresh", SpotifyController, :refresh
   end
 

@@ -1,6 +1,6 @@
 defmodule BulmaTimeWeb.SpotifyController do
   use BulmaTimeWeb, :controller
-
+  require Logger
   def authenticate(conn, params) do
     {conn, path} =
       case Spotify.Authentication.authenticate(conn, params) do
@@ -9,7 +9,7 @@ defmodule BulmaTimeWeb.SpotifyController do
           conn = put_status(conn, 301)
           {conn, "/"}
 
-        {:error, _reason, conn} ->
+        {:error, reason, conn} ->
           {conn, "/"}
       end
 
