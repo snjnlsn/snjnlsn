@@ -1,6 +1,7 @@
 defmodule BulmaTimeWeb.SpotifyController do
   use BulmaTimeWeb, :controller
   require Logger
+
   def authenticate(conn, params) do
     {conn, path} =
       case Spotify.Authentication.authenticate(conn, params) do
