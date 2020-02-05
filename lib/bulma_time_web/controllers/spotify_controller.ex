@@ -1,31 +1,31 @@
 defmodule BulmaTimeWeb.SpotifyController do
   use BulmaTimeWeb, :controller
+  plug Ueberauth
+  alias Ueberauth.Strategy.Helpers
   require Logger
 
-  def authenticate(conn, params) do
-    {conn, path} =
-      case Spotify.Authentication.authenticate(conn, params) do
-        {:ok, conn} ->
-          conn = put_session(conn, :spotify_auth, Spotify.Credentials.new(conn))
-          conn = put_status(conn, 301)
-          {conn, "/"}
-
-        {:error, reason, conn} ->
-          {conn, "/"}
-      end
-
-    redirect(conn, to: path)
+  def request(conn, _params) do
+    render(conn, "request.html", callback_url: Helpers.callback_url(conn))
   end
 
-  def authorize(conn, _params) do
-    redirect(conn, external: Spotify.Authorization.url())
+  # def delete(conn, _params) do
+  #   conn
+  #   |> put_flash(:info, "You have been logged out!")
+  #   |> clear_session()
+  #   |> redirect(to: "/")
+  # end
+
+  def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
+    conn
+    |> put_flash(:error, "Failed to authenticate.")
+    |> redirect(to: "/")
   end
 
-  def refresh(conn, _params) do
-    Spotify.Authentication.refresh(conn)
-    |> put_session(:spotify_auth, Spotify.Credentials.new(conn))
-    |> put_status(301)
-
-    redirect(conn, to: "/")
+  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
+      conn
+      |> put_flash(:info, "Successfully authenticated.")
+      |> put_session(:spotify_token, auth.credentials.token)
+      |> configure_session(renew: true)
+      |> redirect(to: "/")
   end
 end

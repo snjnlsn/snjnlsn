@@ -17,17 +17,18 @@ defmodule BulmaTimeWeb.Router do
   pipe_through :browser
 
   scope "/", BulmaTimeWeb do
-    pipe_through BulmaTimeWeb.Plugs.SpotifyAuth
-
+    pipe_through Ueberauth
     # required to give live views access to playlists
     live "/playlists", PlaylistDisplay
   end
 
   scope "/", BulmaTimeWeb do
     live "/", Live
-    get "/authenticate", SpotifyController, :authenticate
-    get "/authorize", SpotifyController, :authorize
-    get "/refresh", SpotifyController, :refresh
+  end
+
+  scope "/auth", BulmaTimeWeb do
+    get "/spotify", SpotifyController, :request
+    get "/spotify/callback", SpotifyController, :callback
   end
 
   # Other scopes may use custom stacks.
