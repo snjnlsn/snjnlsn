@@ -25,11 +25,15 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Configure Ueberauth for Spotify
+config :ueberauth, Ueberauth,
+  providers: [
+    spotify: {Ueberauth.Strategy.Spotify, [default_scope: "playlist-read-private,playlist-modify-private"]}
+  ]
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "secret.exs"
-import_config "spotify.exs"
 import_config "#{Mix.env()}.exs"

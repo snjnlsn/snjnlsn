@@ -29,6 +29,11 @@ config :bulma_time, BulmaTimeWeb.Endpoint,
     ]
   ]
 
+# Ueberauth Spotify credentials
+config :ueberauth, Ueberauth.Strategy.Spotify.OAuth,
+  client_id: "1a8a31e200864383a2fa5ba643acfc17",
+  client_secret: "8e932d08522c4b0cbb0354757446fcf8"
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

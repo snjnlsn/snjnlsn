@@ -1,23 +1,30 @@
 defmodule BulmaTimeWeb.PlaylistDisplay do
   use Phoenix.LiveView
   require IEx
-  require Logger
+  require HTTPoison
+  require Jason
 
-  def mount(params, session, socket) do
-    {:ok, assign(socket, playlists: get_playlists(session["spotify_auth"]))}
+  @playlist_url "https://api.spotify.com/v1/users/smwus5mq52q7u9zymllzghwyr/playlists"
+
+  def mount(_params, session, socket) do
+    {:ok, assign(socket, :playlists, get_playlists(session["spotify_token"]))}
+  end
+
+  defp get_playlists(token) do
+    case HTTPoison.get(@playlist_url,
+           Authorization: "Bearer #{token}"
+         ) do
+      {:ok, response} ->
+        Jason.decode!(response.body)["items"]
+
+      {:error, reason} ->
+        {:error, reason}
+    end
   end
 
   def render(assigns) do
     ~L"""
-      <div>
-        <p>hello mofo</p>
-      </div>
+      <p><%= @playlists %></p>
     """
-  end
-
-  def get_playlists(auth) do
-    url = Spotify.current_user()
-    |> Spotify.Playlist.get_users_playlists_url()
-    Spotify.Client.get(auth, url)
   end
 end
