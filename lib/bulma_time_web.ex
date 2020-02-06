@@ -43,6 +43,9 @@ defmodule BulmaTimeWeb do
       # copied from LiveView installation guide
       import Phoenix.LiveView.Helpers
 
+      # make surface sigil available in views
+      import Surface
+
       import BulmaTimeWeb.ErrorHelpers
       import BulmaTimeWeb.Gettext
       alias BulmaTimeWeb.Router.Helpers, as: Routes
