@@ -47,6 +47,7 @@ defmodule BulmaTime.MixProject do
       {:phoenix_live_view, "~> 0.6.0", override: true},
       {:floki, ">= 0.0.0", only: :test},
       {:ueberauth_spotify, "0.2.1"},
+      {:surface, git: "https://github.com/msaraiva/surface.git"}
     ]
   end
 

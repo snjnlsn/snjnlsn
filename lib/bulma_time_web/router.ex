@@ -19,7 +19,7 @@ defmodule BulmaTimeWeb.Router do
   scope "/", BulmaTimeWeb do
     pipe_through Ueberauth
     # required to give live views access to playlists
-    live "/playlists", PlaylistDisplay
+    live "/playlists", PlaylistView
   end
 
   scope "/", BulmaTimeWeb do
