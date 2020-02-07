@@ -2,13 +2,13 @@ defmodule BulmaTimeWeb.PlaylistView do
   use Surface.LiveView
   require HTTPoison
   require Jason
-
-  alias BulmaTimeWeb.Component.Playlists
+  require Logger
 
   @playlist_url "https://api.spotify.com/v1/users/smwus5mq52q7u9zymllzghwyr/playlists"
 
   def mount(_params, session, socket) do
-    {:ok, assign(socket, :playlists, get_playlists(session["spotify_token"]))}
+    playlists = get_playlists(session["spotify_token"])
+    {:ok, assign(socket, :playlists, playlists)}
   end
 
   defp get_playlists(token) do
@@ -24,8 +24,11 @@ defmodule BulmaTimeWeb.PlaylistView do
   end
 
   def render(assigns) do
+    Logger.info Enum.at(assigns[:playlists], 0) |> inspect
     ~H"""
-      <Playlists playlists={{@playlists}} />
+      <p :for={{ playlist <- Enum.filter(@playlists, fn p -> p["public"] end) }}>
+        {{ String.downcase playlist["name"] }}
+      </p>
     """
   end
 end
