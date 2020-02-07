@@ -22,10 +22,10 @@ defmodule BulmaTimeWeb.SpotifyController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-      conn
-      |> put_flash(:info, "Successfully authenticated.")
-      |> put_session(:spotify_token, auth.credentials.token)
-      |> configure_session(renew: true)
-      |> redirect(to: "/")
+    conn
+    |> put_flash(:info, "Successfully authenticated.")
+    |> put_session(:spotify_token, auth.credentials.token)
+    |> configure_session(renew: true)
+    |> redirect(to: "/")
   end
 end
