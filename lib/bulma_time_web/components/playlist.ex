@@ -1,6 +1,8 @@
 defmodule BulmaTimeWeb.Component.Playlist do
   use Surface.LiveComponent
 
+  require Logger
+
   property(playlist, :map)
   property(show, :boolean)
 
@@ -10,21 +12,19 @@ defmodule BulmaTimeWeb.Component.Playlist do
 
   def render(assigns) do
     ~H"""
-      <div class={{"modal", isActive: @show }}>
-        <div class="modal-content">
-          {{ @playlist["name"] }}
-        </div>
-        <div class="modal-background"></div>
-        <button click="hide">im done</button>
-      </div>
+    <div :if={{ @show}}>
+      {{ @playlist["name"] }}
+    </div>
     """
   end
 
   def handle_event("show", _, socket) do
+    Logger.info "show"
     {:noreply, assign(socket, show: true)}
   end
 
   def handle_event("hide", _, socket) do
+    Logger.info "hide"
     {:noreply, assign(socket, show: false)}
   end
 end

@@ -3,6 +3,7 @@ defmodule BulmaTimeWeb.PlaylistView do
   require HTTPoison
   require Jason
   require Logger
+  require IEx
   alias BulmaTimeWeb.Component.Playlist
 
   @playlist_url "https://api.spotify.com/v1/users/smwus5mq52q7u9zymllzghwyr/playlists"
@@ -25,13 +26,31 @@ defmodule BulmaTimeWeb.PlaylistView do
   end
 
   def render(assigns) do
-    Logger.info(Enum.at(assigns[:playlists], 0) |> inspect)
-
     ~H"""
-      <div :for={{ playlist <- Enum.filter(@playlists, fn p -> p["public"] end) }}>
-        <Playlist playlist={{playlist}} id={{playlist["name"]}}/>
-        <button phx-click="show">show {{playlist["name"]}}</button>
+      <div :for={{ %{"name" => name} = playlist <- Enum.filter(@playlists, fn p -> p["public"] end) }}>
+        <Playlist playlist={{playlist}} id={{name}}/>
+        <span
+          class="playlist-title"
+          phx-hook="Hover"
+          phx-blur="hide"
+          phx-value-name={{name}}
+        >
+          show {{name}}
+        </span>
       </div>
     """
+  end
+
+  def handle_event("show", %{"name" => name}, socket) do
+    Logger.info "show update"
+    IEx.pry
+    send_update(Playlist, id: name, show: true)
+    {:noreply, socket}
+  end
+
+  def handle_event("hide", %{"name" => name}, socket) do
+    Logger.info "hide update"
+    send_update(Playlist, id: name, show: false)
+    {:noreply, socket}
   end
 end
