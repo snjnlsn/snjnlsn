@@ -13,11 +13,24 @@ import "phoenix_html";
 import { Socket } from "phoenix";
 import LiveSocket from "phoenix_live_view";
 
+const Hooks = {
+  Hover: {
+    mounted() {
+      this.el.addEventListener("mouseover", () => {
+        this.pushEvent("show", {
+          name: this.el.innerText
+        });
+      });
+    }
+  }
+};
+
 let csrfToken = document
   .querySelector("meta[name='csrf-token']")
   .getAttribute("content");
 let liveSocket = new LiveSocket("/live", Socket, {
-  params: { _csrf_token: csrfToken }
+  params: { _csrf_token: csrfToken },
+  hooks: Hooks
 });
 liveSocket.connect();
 // Import local files
