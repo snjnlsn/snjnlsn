@@ -32,24 +32,20 @@ defmodule BulmaTimeWeb.PlaylistView do
         <span
           class="playlist-title"
           phx-hook="Hover"
-          phx-blur="hide"
           phx-value-name={{name}}
         >
-          show {{name}}
+          {{name}}
         </span>
       </div>
     """
   end
 
   def handle_event("show", %{"name" => name}, socket) do
-    Logger.info "show update"
-    IEx.pry
     send_update(Playlist, id: name, show: true)
     {:noreply, socket}
   end
 
   def handle_event("hide", %{"name" => name}, socket) do
-    Logger.info "hide update"
     send_update(Playlist, id: name, show: false)
     {:noreply, socket}
   end

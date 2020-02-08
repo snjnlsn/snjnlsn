@@ -10,11 +10,17 @@ defmodule BulmaTimeWeb.Component.Playlist do
     {:ok, assign(socket, show: false)}
   end
 
+  # def render(assigns) do
+  #   ~H"""
+  #   <div :if={{ @show}} id={{@playlist["name"]}}>
+  #     {{ @playlist["name"] }}
+  #   </div>
+  #   """
+  # end
+
   def render(assigns) do
     ~H"""
-    <div :if={{ @show}}>
-      {{ @playlist["name"] }}
-    </div>
+      <p>hello</p>
     """
   end
 
