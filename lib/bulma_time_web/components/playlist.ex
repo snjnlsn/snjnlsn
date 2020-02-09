@@ -1,36 +1,27 @@
 defmodule BulmaTimeWeb.Component.Playlist do
   use Surface.LiveComponent
 
-  require Logger
-
   property(playlist, :map)
-  property(show, :boolean)
+  property(show, :boolean, default: false)
+  property(images, :list)
 
-  def mount(_,_, socket) do
+  def mount(_, _, socket) do
     {:ok, assign(socket, show: false)}
   end
 
-  # def render(assigns) do
-  #   ~H"""
-  #   <div :if={{ @show}} id={{@playlist["name"]}}>
-  #     {{ @playlist["name"] }}
-  #   </div>
-  #   """
-  # end
-
   def render(assigns) do
+    image = Enum.find(assigns[:images], fn i -> i["height"] == 640 end)
+
     ~H"""
-      <p>hello</p>
+    <div>
+      {{ @inner_content.() }}
+      <div
+        :if={{ @show }}
+        id={{"#{@playlist["name"]}-cond-div"}}
+      >
+        <img src={{image["url"]}} alt="cover of playlist" />
+      </div>
+    </div>
     """
-  end
-
-  def handle_event("show", _, socket) do
-    Logger.info "show"
-    {:noreply, assign(socket, show: true)}
-  end
-
-  def handle_event("hide", _, socket) do
-    Logger.info "hide"
-    {:noreply, assign(socket, show: false)}
   end
 end

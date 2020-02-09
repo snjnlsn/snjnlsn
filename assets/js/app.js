@@ -14,11 +14,16 @@ import { Socket } from "phoenix";
 import LiveSocket from "phoenix_live_view";
 
 const Hooks = {
-  Hover: {
+  playlistTitle: {
     mounted() {
-      this.el.addEventListener("mouseover", () => {
+      this.el.addEventListener("mouseenter", () => {
         this.pushEvent("show", {
-          name: this.el.innerText
+          name: this.el.getAttribute("phx-value-name")
+        });
+      });
+      this.el.addEventListener("mouseleave", () => {
+        this.pushEvent("hide", {
+          name: this.el.getAttribute("phx-value-name")
         });
       });
     }
