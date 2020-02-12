@@ -25,23 +25,18 @@ defmodule BulmaTimeWeb.PlaylistView do
     end
   end
 
-  @spec render(map) :: Phoenix.LiveView.Rendered.t()
   def render(assigns) do
     ~H"""
-      <div :for={{ %{"name" => name, "images" => images} = playlist <- Enum.filter(@playlists, fn p -> p["public"] end)}}
-      phx-debounce="20000"
-      phx-hook="playlistTitle"
-      phx-value-name={{name}}
-      id={{"#{name}-div"}}
-      >
-        <Playlist playlist={{playlist}} images={{images}} id={{name}}>
-          <span
-            id={{"#{name}-span"}}
-            class="playlist-title"
-          >
-            {{name}}
-          </span>
-        </Playlist>
+      <div class={{:tile, :isAncestor, :isVertical}}>
+        <div :for={{ %{"name" => name, "images" => images} = playlist <- Enum.filter(@playlists, fn p -> p["public"] end)}}
+          phx-debounce="20000"
+          phx-hook="playlistTitle"
+          phx-value-name={{name}}
+          id={{"#{name}-div"}}
+          class="tile is-parent"
+        >
+          <Playlist playlist={{playlist}} images={{images}} id={{name}}/>
+        </div>
       </div>
     """
   end
