@@ -9,17 +9,19 @@ defmodule BulmaTimeWeb.Component.Playlist do
     {:ok, assign(socket, show: false)}
   end
 
+  @spec render(map) :: Phoenix.LiveView.Rendered.t()
   def render(assigns) do
-    image = Enum.find(assigns[:images], fn i -> i["height"] == 640 end)
+    # image = Enum.find(assigns[:images], fn i -> i["height"] == 640 end)
 
     ~H"""
-    <div>
-      {{ @inner_content.() }}
+    <div class={{:tile, :hasBackgroundBlackBis, :isChild, :box}}>
+      <h3 class={{"title", hasTextGreyDarker: !@show}}>{{@playlist["name"]}}</h3>
       <div
+        class={{:content}}
         :if={{ @show }}
         id={{"#{@playlist["name"]}-cond-div"}}
       >
-        <img src={{image["url"]}} alt="cover of playlist" />
+        <p>{{@playlist["uri"]}}</p>
       </div>
     </div>
     """
