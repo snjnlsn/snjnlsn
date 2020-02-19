@@ -15,7 +15,7 @@ defmodule BulmaTimeWeb.Component.Playlist do
 
     ~H"""
     <div class={{:tile, :hasBackgroundBlackBis, :isChild, :box}}>
-      <h3 class={{"title", hasTextGreyDarker: !@show}}>{{@playlist["name"]}}</h3>
+      <h3 class={{"title", hasTextGrey: !@show}}>{{@playlist["name"]}}</h3>
       <div
         class={{:content}}
         :if={{ @show }}
