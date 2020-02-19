@@ -1,5 +1,7 @@
 defmodule BulmaTimeWeb.Router do
   use BulmaTimeWeb, :router
+  alias BulmaTimeWeb.Plugs.SpotifyAuth
+  require Logger
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -17,7 +19,7 @@ defmodule BulmaTimeWeb.Router do
   pipe_through :browser
 
   scope "/", BulmaTimeWeb do
-    pipe_through Ueberauth
+    pipe_through [Ueberauth, SpotifyAuth]
     # required to give live views access to playlists
     live "/playlists", PlaylistView
   end
