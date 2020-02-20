@@ -42,6 +42,7 @@ defmodule BulmaTime.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
+      {:poison, "~> 3.1"},
       {:httpoison, "~> 1.6"},
       {:plug_cowboy, "~> 2.0"},
       {:phoenix_live_view, "~> 0.6.0", override: true},
