@@ -1,16 +1,16 @@
 use Mix.Config
 
 # Configure your database
-config :bulma_time, BulmaTime.Repo,
+config :snjnlsn, Snjnlsn.Repo,
   username: "postgres",
   password: "postgres",
-  database: "bulma_time_test",
+  database: "snjnlsn_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :bulma_time, BulmaTimeWeb.Endpoint,
+config :snjnlsn, SnjnlsnWeb.Endpoint,
   http: [port: 4002],
   server: false
 

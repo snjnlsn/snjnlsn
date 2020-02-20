@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(BulmaTime.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(Snjnlsn.Repo, :manual)

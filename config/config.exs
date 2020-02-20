@@ -9,16 +9,16 @@ use Mix.Config
 
 key = "JYytuCxSlQg3hZQtrL3/sGZTeE+PK3p2Ot+tyTHlfA9oxEcii9QyPIPU/VLi5UCQ"
 
-config :bulma_time,
-  ecto_repos: [BulmaTime.Repo]
+config :snjnlsn,
+  ecto_repos: [Snjnlsn.Repo]
 
 # Configures the endpoint
-config :bulma_time, BulmaTimeWeb.Endpoint,
+config :snjnlsn, SnjnlsnWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: key,
   live_view: [signing_salt: key],
-  render_errors: [view: BulmaTimeWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: BulmaTime.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: SnjnlsnWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: Snjnlsn.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,

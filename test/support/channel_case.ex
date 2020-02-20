@@ -1,4 +1,4 @@
-defmodule BulmaTimeWeb.ChannelCase do
+defmodule SnjnlsnWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,15 +21,15 @@ defmodule BulmaTimeWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint BulmaTimeWeb.Endpoint
+      @endpoint SnjnlsnWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(BulmaTime.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Snjnlsn.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(BulmaTime.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Snjnlsn.Repo, {:shared, self()})
     end
 
     :ok

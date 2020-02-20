@@ -1,4 +1,4 @@
-defmodule BulmaTime.DataCase do
+defmodule Snjnlsn.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -10,7 +10,7 @@ defmodule BulmaTime.DataCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use BulmaTimeWeb.DataCase, async: true`, although
+  by setting `use SnjnlsnWeb.DataCase, async: true`, although
   this option is not recommendded for other databases.
   """
 
@@ -18,20 +18,20 @@ defmodule BulmaTime.DataCase do
 
   using do
     quote do
-      alias BulmaTime.Repo
+      alias Snjnlsn.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import BulmaTime.DataCase
+      import Snjnlsn.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(BulmaTime.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Snjnlsn.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(BulmaTime.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Snjnlsn.Repo, {:shared, self()})
     end
 
     :ok

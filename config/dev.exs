@@ -1,7 +1,7 @@
 use Mix.Config
 
 # Configure your database
-config :bulma_time, BulmaTime.Repo,
+config :snjnlsn, Snjnlsn.Repo,
   username: "kon4574",
   database: "default",
   hostname: "localhost",
@@ -14,7 +14,7 @@ config :bulma_time, BulmaTime.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :bulma_time, BulmaTimeWeb.Endpoint,
+config :snjnlsn, SnjnlsnWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -59,13 +59,13 @@ config :ueberauth, Ueberauth.Strategy.Spotify.OAuth,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :bulma_time, BulmaTimeWeb.Endpoint,
+config :snjnlsn, SnjnlsnWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/bulma_time_web/{live,views}/.*(ex)$",
-      ~r"lib/bulma_time_web/templates/.*(eex)$"
+      ~r"lib/snjnlsn_web/{live,views}/.*(ex)$",
+      ~r"lib/snjnlsn_web/templates/.*(eex)$"
     ]
   ]
 
