@@ -3,6 +3,9 @@ defmodule BulmaTime.Playlists.Playlist do
   Private logic for handling Spotify Playlists, to be used by public Playlists context
   """
 
+  require IEx
+  @playlist_url "https://api.spotify.com/v1/users/smwus5mq52q7u9zymllzghwyr/playlists"
+
   defstruct name: "",
             description: "",
             id: "",
@@ -10,7 +13,8 @@ defmodule BulmaTime.Playlists.Playlist do
             images: %{},
             tracks: %{},
             snapshot_id: "",
-            current: false
+            current: false,
+            public: false
 
   @type t() :: %__MODULE__{
           name: String.t(),
@@ -20,8 +24,21 @@ defmodule BulmaTime.Playlists.Playlist do
           images: map(),
           tracks: map(),
           snapshot_id: String.t(),
-          current: boolean()
+          current: boolean(),
+          public: boolean()
         }
 
-  def fetch_playlists, do: [%__MODULE__{}, %__MODULE__{}]
+  def fetch_playlists(token) do
+    case HTTPoison.get(@playlist_url,
+           Authorization: "Bearer #{token}"
+         ) do
+      {:ok, response} ->
+        {:ok,
+         Poison.decode!(response.body, as: %BulmaTime.Playlists{}).items
+         |> Enum.filter(fn p -> p.public end)}
+
+      {:error, reason} ->
+        {:error, reason}
+    end
+  end
 end
