@@ -1,10 +1,8 @@
-defmodule BulmaTimeWeb.PlaylistView do
+defmodule BulmaTimeWeb.PlaylistLive do
   use Surface.LiveView
   require HTTPoison
   require Jason
   alias BulmaTimeWeb.Component.Playlist
-  alias BulmaTimeWeb.Router.Helpers, as: Routes
-  alias Phoenix.LiveView.Helpers
 
   @playlist_url "https://api.spotify.com/v1/users/smwus5mq52q7u9zymllzghwyr/playlists"
 

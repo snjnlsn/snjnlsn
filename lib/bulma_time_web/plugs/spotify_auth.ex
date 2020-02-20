@@ -1,4 +1,4 @@
-defmodule BulmaTimeWeb.Plugs.SpotifyAuth do
+defmodule BulmaTimeWeb.SpotifyAuthPlug do
   import Plug.Conn
   def init(default), do: default
 
