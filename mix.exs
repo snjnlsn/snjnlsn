@@ -1,9 +1,9 @@
-defmodule BulmaTime.MixProject do
+defmodule Snjnlsn.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :bulma_time,
+      app: :snjnlsn,
       version: "0.1.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule BulmaTime.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {BulmaTime.Application, []},
+      mod: {Snjnlsn.Application, []},
       extra_applications: [:logger, :runtime_tools, :ueberauth_spotify, :phoenix_pubsub]
     ]
   end
