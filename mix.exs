@@ -20,9 +20,13 @@ defmodule Snjnlsn.MixProject do
   def application do
     [
       mod: {Snjnlsn.Application, []},
-      extra_applications: [:logger, :runtime_tools, :ueberauth_spotify, :phoenix_pubsub]
+      extra_applications: [:logger, :runtime_tools],
+      applications: applications(Mix.env)
     ]
   end
+
+  defp applications(:test), do: applications(:default) ++ [:cowboy, :plug]
+  defp applications(_), do: [:ueberauth_spotify, :phoenix_pubsub]
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
