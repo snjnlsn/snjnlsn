@@ -6,7 +6,7 @@ defmodule Snjnlsn.Application do
   use Application
 
   def start(_type, args) do
-    default_children = [
+    children = [
       # Start the Ecto repository
       Snjnlsn.Repo,
       # Start the endpoint when the application starts
@@ -14,12 +14,6 @@ defmodule Snjnlsn.Application do
       # Starts a worker by calling: Snjnlsn.Worker.start_link(arg)
       # {Snjnlsn.Worker, arg},
     ]
-
-    # List all child processes to be supervised
-    children = case args do
-      [env: :test] -> [{Plug.Cowboy, scheme: :https, plug: Snjnlsn.SpotifyMockServer, options: [port: 8081]}] ++ default_children
-      [_] -> default_children
-    end
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
