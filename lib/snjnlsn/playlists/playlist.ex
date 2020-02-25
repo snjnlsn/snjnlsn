@@ -4,7 +4,7 @@ defmodule Snjnlsn.Playlists.Playlist do
   """
 
   require IEx
-  @playlist_url "https://api.spotify.com/v1/users/smwus5mq52q7u9zymllzghwyr/playlists"
+  @playlist_url Application.get_env(:snjnsln, :playlist_url)
 
   defstruct name: "",
             description: "",

@@ -20,13 +20,9 @@ defmodule Snjnlsn.MixProject do
   def application do
     [
       mod: {Snjnlsn.Application, []},
-      extra_applications: [:logger, :runtime_tools],
-      applications: applications(Mix.env)
+      extra_applications: [:ueberauth_spotify, :phoenix_pubsub, :logger, :runtime_tools]
     ]
   end
-
-  defp applications(:test), do: applications(:default) ++ [:cowboy, :plug]
-  defp applications(_), do: [:ueberauth_spotify, :phoenix_pubsub]
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
@@ -52,7 +48,8 @@ defmodule Snjnlsn.MixProject do
       {:phoenix_live_view, "~> 0.6.0", override: true},
       {:floki, ">= 0.0.0", only: :test},
       {:ueberauth_spotify, "0.2.1"},
-      {:surface, git: "https://github.com/msaraiva/surface.git"}
+      {:surface, git: "https://github.com/msaraiva/surface.git"},
+      {:double_bypass, "~> 0.0.4", only: :test}
     ]
   end
 
