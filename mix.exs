@@ -49,7 +49,7 @@ defmodule Snjnlsn.MixProject do
       {:floki, ">= 0.0.0", only: :test},
       {:ueberauth_spotify, "0.2.1"},
       {:surface, git: "https://github.com/msaraiva/surface.git"},
-      {:double_bypass, "~> 0.0.4", only: :test}
+      {:bypass, "~> 1.0", only: :test}
     ]
   end
 
