@@ -28,8 +28,8 @@ defmodule Snjnlsn.Playlists.Playlist do
           public: boolean()
         }
 
-  def fetch_playlists(token) do
-    case HTTPoison.get(@playlist_url,
+  def fetch_playlists(token, url \\ @playlist_url) do
+    case HTTPoison.get(url,
            Authorization: "Bearer #{token}"
          ) do
       {:ok, response} ->
