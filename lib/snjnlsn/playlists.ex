@@ -20,4 +20,10 @@ defmodule Snjnlsn.Playlists do
         IO.puts("Error fetching playlist: ", reason)
     end
   end
+
+  @doc """
+  Returns a playlist with :active set to true
+  """
+  @spec set_active(Playlist.t()) :: Playlist.t()
+  def set_active(playlist), do: Playlist.set_active playlist
 end
