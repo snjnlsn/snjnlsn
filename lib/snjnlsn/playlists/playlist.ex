@@ -13,7 +13,7 @@ defmodule Snjnlsn.Playlists.Playlist do
             images: %{},
             tracks: %{},
             snapshot_id: "",
-            current: false,
+            active: false,
             public: false
 
   @type t() :: %__MODULE__{
@@ -24,10 +24,14 @@ defmodule Snjnlsn.Playlists.Playlist do
           images: map(),
           tracks: map(),
           snapshot_id: String.t(),
-          current: boolean(),
+          active: boolean(),
           public: boolean()
         }
 
+  @doc """
+  When Spotify API is successful, returns a list of playlists
+  """
+  @spec fetch_playlists(any, binary) :: {:error, HTTPoison.Error.t()} | {:ok, [any]}
   def fetch_playlists(token, url \\ @playlist_url) do
     case HTTPoison.get(url,
            Authorization: "Bearer #{token}"
@@ -41,4 +45,10 @@ defmodule Snjnlsn.Playlists.Playlist do
         {:error, reason}
     end
   end
+
+  @doc """
+  returns a playlist marked as active
+  """
+  @spec set_active(__MODULE__.t()) :: __MODULE__.t()
+  def set_active(playlist), do: %__MODULE__{playlist | :active => true}
 end
