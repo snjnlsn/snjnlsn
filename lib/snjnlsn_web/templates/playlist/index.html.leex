@@ -1,0 +1,11 @@
+<div class={{:tile, :isAncestor, :isVertical}}>
+  <div :for={{ playlist <- @playlists}}
+    phx-debounce="20000"
+    phx-click="click"
+    phx-value-name={{playlist.name}}
+    id={{"#{playlist.name}-div"}}
+    class="tile is-parent"
+  >
+    <Playlist playlist={{playlist}}/>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-defmodule SnjnlsnWeb.Component.Playlist do
+defmodule SnjnlsnWeb.PlaylistComponent do
   use Surface.LiveComponent
 
   property(playlist, :any)

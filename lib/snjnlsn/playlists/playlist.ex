@@ -4,7 +4,6 @@ defmodule Snjnlsn.Playlists.Playlist do
   """
 
   require IEx
-  @playlist_url Application.get_env(:snjnsln, :playlist_url)
 
   defstruct name: "",
             description: "",
@@ -32,7 +31,7 @@ defmodule Snjnlsn.Playlists.Playlist do
   When Spotify API is successful, returns a list of playlists
   """
   @spec fetch_playlists(any, binary) :: {:error, HTTPoison.Error.t()} | {:ok, [any]}
-  def fetch_playlists(token, url \\ @playlist_url) do
+  def fetch_playlists(token, url \\ Application.get_env(:snjnsln, :playlist_url)) do
     case HTTPoison.get(url,
            Authorization: "Bearer #{token}"
          ) do
