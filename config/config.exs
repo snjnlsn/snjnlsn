@@ -10,10 +10,11 @@ use Mix.Config
 key = "JYytuCxSlQg3hZQtrL3/sGZTeE+PK3p2Ot+tyTHlfA9oxEcii9QyPIPU/VLi5UCQ"
 
 config :snjnlsn,
-  ecto_repos: [Snjnlsn.Repo]
+  ecto_repos: [Snjnlsn.Repo],
+  playlist_url: "https://api.spotify.com/v1/users/smwus5mq52q7u9zymllzghwyr/playlists"
 
-# Configures the endpoint
-config :snjnlsn, SnjnlsnWeb.Endpoint,
+  # Configures the endpoint
+  config :snjnlsn, SnjnlsnWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: key,
   live_view: [signing_salt: key],

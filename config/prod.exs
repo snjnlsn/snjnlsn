@@ -16,8 +16,7 @@ config :snjnlsn, SnjnlsnWeb.Endpoint,
     port: 443
   ],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  cache_static_manifest: "priv/static/cache_manifest.json",
-  playlist_url: "https://api.spotify.com/v1/users/smwus5mq52q7u9zymllzghwyr/playlists"
+  cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info

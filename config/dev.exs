@@ -6,8 +6,7 @@ config :snjnlsn, Snjnlsn.Repo,
   database: "default",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
-  pool_size: 10,
-  playlist_url: "https://api.spotify.com/v1/users/smwus5mq52q7u9zymllzghwyr/playlists"
+  pool_size: 10
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
