@@ -45,7 +45,7 @@ defmodule Snjnlsn.MixProject do
       {:poison, "~> 3.1"},
       {:httpoison, "~> 1.6"},
       {:plug_cowboy, "~> 2.0"},
-      {:phoenix_live_view, "~> 0.6.0", override: true},
+      {:phoenix_live_view, "~> 0.8.0", override: true},
       {:floki, ">= 0.0.0", only: :test},
       {:ueberauth_spotify, "0.2.1"},
       {:surface, git: "https://github.com/msaraiva/surface.git"},
