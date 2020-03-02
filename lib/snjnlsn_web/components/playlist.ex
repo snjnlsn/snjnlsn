@@ -11,7 +11,7 @@ defmodule SnjnlsnWeb.PlaylistComponent do
   def render(assigns) do
     ~H"""
     <div class={{:tile, :hasBackgroundBlackBis, :isChild, :box}}>
-      <h3 class={{"title", hasTextGrey: !@playlist.current}}>{{@playlist.name}}</h3>
+      <h3 class={{"title", hasTextGrey: !@playlist.active}}>{{@playlist.name}}</h3>
       <div
         class={{:content}}
         id={{"#{@playlist.name}-cond-div"}}
