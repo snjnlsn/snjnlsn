@@ -31,10 +31,11 @@ defmodule Snjnlsn.Playlists.Playlist do
   When Spotify API is successful, returns a list of playlists
   """
   @spec fetch_playlists(any, binary) :: {:error, HTTPoison.Error.t()} | {:ok, [any]}
-  def fetch_playlists(token, url \\ Application.get_env(:snjnsln, :playlist_url)) do
-    case HTTPoison.get(url,
-           Authorization: "Bearer #{token}"
-         ) do
+  def fetch_playlists(
+        token,
+        url \\ "https://api.spotify.com/v1/users/smwus5mq52q7u9zymllzghwyr/playlists"
+      ) do
+    case HTTPoison.get(url, Authorization: "Bearer #{token}") do
       {:ok, response} ->
         {:ok,
          Poison.decode!(response.body, as: %Snjnlsn.Playlists{}).items
@@ -42,6 +43,9 @@ defmodule Snjnlsn.Playlists.Playlist do
 
       {:error, reason} ->
         {:error, reason}
+
+      response ->
+        response
     end
   end
 

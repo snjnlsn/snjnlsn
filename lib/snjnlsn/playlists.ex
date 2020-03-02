@@ -13,11 +13,11 @@ defmodule Snjnlsn.Playlists do
   @spec load(term()) :: __MODULE__.t()
   def load(token) do
     case Playlist.fetch_playlists(token) do
-      {:ok, playlists} ->
-        playlists
+      {:ok, list} ->
+        list
 
       {:error, reason} ->
-        IO.puts("Error fetching playlist: ", reason)
+        []
     end
   end
 
