@@ -1,3 +1,10 @@
 /* This file is for your main application css. */
 
 @import "./phoenix.css";
+
+.playlist-body {
+  width: 200px;
+  height: 300px;
+  background-image: linear-gradient(to right, transparent, mistyrose),
+      url(attr(data-image));
+}
