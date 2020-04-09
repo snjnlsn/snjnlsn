@@ -2,7 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :snjnlsn, Snjnlsn.Repo,
-  username: "kon4574",
+  username: "postgres",
+  password: "postgres",
   database: "default",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
