@@ -11,6 +11,7 @@ defmodule Snjnlsn.Playlists.Playlist do
             href: "",
             images: %{},
             tracks: %{},
+            owner: %{},
             snapshot_id: "",
             active: false,
             public: false
@@ -22,6 +23,7 @@ defmodule Snjnlsn.Playlists.Playlist do
           href: String.t(),
           images: map(),
           tracks: map(),
+          owner: map(),
           snapshot_id: String.t(),
           active: boolean(),
           public: boolean()

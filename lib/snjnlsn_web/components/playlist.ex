@@ -10,14 +10,11 @@ defmodule SnjnlsnWeb.PlaylistComponent do
   @spec render(map) :: Phoenix.LiveView.Rendered.t()
   def render(assigns) do
     ~H"""
-    <div class={{:tile, :hasBackgroundBlackBis, :isChild, :box}}>
-      <h3 class={{"title", hasTextGrey: !@playlist.active}}>{{@playlist.name}}</h3>
       <div
-        class={{:content}}
-        id={{"#{@playlist.name}-cond-div"}}
+      class="playlist-body"
+      id={{"#{@playlist.name}-cond-div"}}
+      data-image={{List.first(@playlist.images) |> Map.get("url")}}
       >
-        <p>{{@playlist.href}}</p>
-      </div>
     </div>
     """
   end
