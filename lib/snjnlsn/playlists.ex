@@ -2,10 +2,10 @@ defmodule Snjnlsn.Playlists do
   @moduledoc """
   Public API Context for Spotify Playlist data
   """
+  @type t :: %__MODULE__{}
+  defstruct [:items]
 
   alias Snjnlsn.Playlists.Playlist
-
-  defstruct items: [%Playlist{}]
 
   @doc """
   Returns list of Sanjay's playlists
