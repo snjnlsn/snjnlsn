@@ -9,7 +9,7 @@ defmodule SnjnlsnWeb.PlaylistLive do
   end
 
   def render(assigns) do
-    IO.inspect assigns
+    IO.inspect List.first(assigns.playlists)
     ~H"""
       <div class={{:tile, :isAncestor, :isVertical}}>
         <div :for={{ playlist <- @playlists }}

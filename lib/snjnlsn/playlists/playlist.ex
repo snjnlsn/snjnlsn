@@ -3,8 +3,6 @@ defmodule Snjnlsn.Playlists.Playlist do
   Private logic for handling Spotify Playlists, to be used by public Playlists context
   """
 
-  require IEx
-
   defstruct name: "",
             description: "",
             id: "",
@@ -39,16 +37,16 @@ defmodule Snjnlsn.Playlists.Playlist do
       ) do
     case HTTPoison.get(url, Authorization: "Bearer #{token}") do
       {:ok, response} ->
-        {:ok,
-         Poison.decode!(response.body, as: %Snjnlsn.Playlists{}).items
-         |> Enum.filter(fn p -> p.public end)}
-
+        {:ok, Poison.decode!(response.body, as: %Snjnlsn.Playlists{}).items |> Enum.map(&map_to_playlist/1)}
       {:error, reason} ->
         {:error, reason}
-
-      response ->
-        response
     end
+  end
+
+  @spec map_to_playlist(%{}) :: __MODULE__.t()
+  defp map_to_playlist(playlist_map) do
+    atomized = for {key, val} <- playlist_map, into: %{}, do: {String.to_atom(key), val}
+    struct(__MODULE__, atomized)
   end
 
   @doc """
