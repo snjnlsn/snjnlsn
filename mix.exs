@@ -5,7 +5,7 @@ defmodule Snjnlsn.MixProject do
     [
       app: :snjnlsn,
       version: "0.1.0",
-      elixir: "~> 1.5",
+      elixir: "~> 1.10",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -39,17 +39,18 @@ defmodule Snjnlsn.MixProject do
       {:ecto_sql, "~> 3.1"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:poison, "~> 3.1"},
       {:httpoison, "~> 1.6"},
       {:plug_cowboy, "~> 2.0"},
       {:phoenix_live_view, "~> 0.8.0", override: true},
-      {:floki, ">= 0.0.0", only: :test},
       {:ueberauth_spotify, "0.2.1"},
       {:surface, git: "https://github.com/msaraiva/surface.git"},
-      {:bypass, "~> 1.0", only: :test}
+      {:earmark, "~> 1.3"},
+      {:floki, ">= 0.0.0", only: :test},
+      {:bypass, "~> 1.0", only: :test},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
     ]
   end
 
