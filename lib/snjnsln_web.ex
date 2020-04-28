@@ -43,9 +43,6 @@ defmodule SnjnlsnWeb do
       # copied from LiveView installation guide
       import Phoenix.LiveView.Helpers
 
-      # make surface sigil available in views
-      import Surface
-
       import SnjnlsnWeb.ErrorHelpers
       import SnjnlsnWeb.Gettext
       alias SnjnlsnWeb.Router.Helpers, as: Routes

@@ -1,5 +1,5 @@
 defmodule SnjnlsnWeb.PlaylistLive do
-  use Surface.LiveView
+  use Phoenix.LiveView
   alias SnjnlsnWeb.PlaylistComponent
   alias Snjnlsn.Playlists
 
@@ -10,7 +10,7 @@ defmodule SnjnlsnWeb.PlaylistLive do
 
   def render(assigns) do
     IO.inspect List.first(assigns.playlists)
-    ~H"""
+    ~L"""
       <div class={{:tile, :isAncestor, :isVertical}}>
         <div :for={{ playlist <- @playlists }}
           phx-debounce="20000"

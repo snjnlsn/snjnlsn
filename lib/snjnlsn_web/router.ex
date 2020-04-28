@@ -1,9 +1,9 @@
 defmodule SnjnlsnWeb.Router do
   use SnjnlsnWeb, :router
   alias SnjnlsnWeb.SpotifyAuthPlug
-  require Logger
 
   pipeline :browser do
+    plug :put_root_layout, {SnjnlsnWeb.LayoutView, :root}
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
