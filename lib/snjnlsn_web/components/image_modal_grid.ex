@@ -8,7 +8,7 @@ defmodule SnjnlsnWeb.AOTY do
   end
 
   # def render(assigns) do
-  #   ~H"""
+  #   ~L"""
   #     <div :for={{ item <- @album_images }}>
   #     <figure class="image is-square">
   #       <img src={{item}} alt="" phx-click="show"/>

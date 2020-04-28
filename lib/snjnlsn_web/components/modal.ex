@@ -7,7 +7,7 @@ defmodule SnjnlsnWeb.Modal do
   end
 
   # def render(assigns) do
-  #   ~H"""
+  #   ~L"""
   #     <div class={{"modal", isActive: @show }}>
   #       <div class="modal-content">
   #         {{ @inner_content.() }}

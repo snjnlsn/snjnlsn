@@ -1,7 +1,5 @@
 defmodule SnjnlsnWeb.PlaylistComponent do
-  use Surface.LiveComponent
-
-  property(playlist, :any)
+  use Phoenix.LiveComponent
 
   def mount(_, _, socket) do
     {:ok, socket}
@@ -9,7 +7,7 @@ defmodule SnjnlsnWeb.PlaylistComponent do
 
   @spec render(map) :: Phoenix.LiveView.Rendered.t()
   def render(assigns) do
-    ~H"""
+    ~L"""
       <div
       class="playlist-body"
       id={{"#{@playlist.name}-cond-div"}}
