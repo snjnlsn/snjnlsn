@@ -14,4 +14,9 @@ defmodule Snjnlsn.Blog do
   @posts Enum.sort_by(posts, & &1.date, {:desc, Date})
 
   def list_posts, do: @posts
+
+  def get_body(post) do
+    {:ok, val, _ignore} = post.body
+    val
+  end
 end
