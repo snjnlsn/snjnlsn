@@ -21,6 +21,7 @@ defmodule SnjnlsnWeb.Router do
   scope "/", SnjnlsnWeb do
     pipe_through [Ueberauth, SpotifyAuthPlug]
     live "/playlists", PlaylistLive
+    live "/blog", BlogLive
   end
 
   scope "/", SnjnlsnWeb do
