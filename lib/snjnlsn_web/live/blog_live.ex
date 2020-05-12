@@ -1,6 +1,6 @@
 defmodule SnjnlsnWeb.BlogLive do
   use Phoenix.LiveView
-  import Phoenix.HTML.Tag
+  import Phoenix.HTML
   alias Snjnlsn.Blog
 
   def mount(_params, _session, socket) do
@@ -13,7 +13,8 @@ defmodule SnjnlsnWeb.BlogLive do
         <%= for post <- @posts do %>
           <div id="<%= post.id %>" >
             <h1><%= post.title %></h1>
-            <%= content_tag :p, post.body %>
+            <h5><%= post.author %> on <%= post.date %></h5>
+            <%= raw Blog.get_body(post) %>
           </div>
         <% end %>
       </div>
