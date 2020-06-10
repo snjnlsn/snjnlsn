@@ -7,17 +7,14 @@
 # General application configuration
 use Mix.Config
 
-key = "JYytuCxSlQg3hZQtrL3/sGZTeE+PK3p2Ot+tyTHlfA9oxEcii9QyPIPU/VLi5UCQ"
+key = Application.get_env(:my_app, :secret_key_base)
 
 config :snjnlsn,
-  ecto_repos: [Snjnlsn.Repo],
-  playlist_url: "https://api.spotify.com/v1/users/smwus5mq52q7u9zymllzghwyr/playlists"
+  ecto_repos: [Snjnlsn.Repo]
 
 # Configures the endpoint
 config :snjnlsn, SnjnlsnWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: key,
-  live_view: [signing_salt: key],
   render_errors: [view: SnjnlsnWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Snjnlsn.PubSub, adapter: Phoenix.PubSub.PG2]
 
@@ -39,4 +36,5 @@ config :phoenix, :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
+import_config "secret.exs"
 import_config "#{Mix.env()}.exs"
