@@ -7,8 +7,9 @@
 # The directory Mix downloads your dependencies sources to.
 /deps/
 
-# secret config stuff for spootify
+# security
 /config/secret.exs
+/config/prod.secret.exs
 
 # Where 3rd-party dependencies like ExDoc output generated docs.
 /doc/
