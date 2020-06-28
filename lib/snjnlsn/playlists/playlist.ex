@@ -37,7 +37,7 @@ defmodule Snjnlsn.Playlists.Playlist do
       ) do
     case HTTPoison.get(url, Authorization: "Bearer #{token}") do
       {:ok, response} ->
-        {:ok, Poison.decode!(response.body, as: %Snjnlsn.Playlists{}).items |> Enum.map(&map_to_playlist/1)}
+        {:ok, Poison.decode!(response.body, as: %{})["items"] |> Enum.map(&map_to_playlist/1)}
       {:error, reason} ->
         {:error, reason}
     end

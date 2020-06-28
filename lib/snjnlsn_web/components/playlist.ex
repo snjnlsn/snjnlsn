@@ -10,9 +10,9 @@ defmodule SnjnlsnWeb.PlaylistComponent do
     ~L"""
       <div
       class="playlist-body"
-      id={{"#{@playlist.name}-cond-div"}}
-      data-image={{List.first(@playlist.images) |> Map.get("url")}}
+      id="<%= "#{@playlist.name}-cond-div" %>"
       >
+      <img src="<%= List.first(@playlist.images) |> Map.get("url") %>" />
     </div>
     """
   end
