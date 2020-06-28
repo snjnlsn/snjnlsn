@@ -7,7 +7,9 @@ defmodule SnjnlsnWeb.PlaylistLive do
     playlists = Playlists.load(session["spotify_token"])
     {:ok, assign(socket, :playlists, playlists)}
   end
-2
+
+  2
+
   def render(assigns) do
     ~L"""
       <%= for playlist <- @playlists do %>

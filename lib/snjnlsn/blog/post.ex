@@ -19,6 +19,7 @@ defmodule Snjnlsn.Blog.Post do
 
   defp parse_contents(id, contents) do
     parts = Regex.split(~r/^==(\w+)==\n/m, contents, include_captures: true, trim: true)
+
     for [attr_unformatted, val] <- Enum.chunk_every(parts, 2) do
       [_, attr, _] = String.split(attr_unformatted, "==")
       attr = String.to_atom(attr)

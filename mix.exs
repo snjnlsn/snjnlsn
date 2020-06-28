@@ -10,7 +10,8 @@ defmodule Snjnlsn.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      dialyzer: [plt_add_deps: :transitive]
     ]
   end
 
@@ -50,6 +51,8 @@ defmodule Snjnlsn.MixProject do
       {:floki, ">= 0.0.0", only: :test},
       {:bypass, "~> 1.0", only: :test},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
+      {:credo, "~> 1.1", only: [:dev, :test], runtime: false}
     ]
   end
 
