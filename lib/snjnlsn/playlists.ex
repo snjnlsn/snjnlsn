@@ -10,13 +10,13 @@ defmodule Snjnlsn.Playlists do
   @doc """
   Returns list of Sanjay's playlists
   """
-  @spec load(term()) :: __MODULE__.t()
+  @spec load(term()) :: List.t()
   def load(token) do
     case Playlist.fetch_playlists(token) do
       {:ok, list} ->
         list
 
-      {:error, reason} ->
+      {:error, _reason} ->
         []
     end
   end

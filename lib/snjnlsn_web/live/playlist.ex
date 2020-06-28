@@ -7,21 +7,19 @@ defmodule SnjnlsnWeb.PlaylistLive do
     playlists = Playlists.load(session["spotify_token"])
     {:ok, assign(socket, :playlists, playlists)}
   end
-
+2
   def render(assigns) do
-    IO.inspect List.first(assigns.playlists)
     ~L"""
-      <div class={{:tile, :isAncestor, :isVertical}}>
-        <div :for={{ playlist <- @playlists }}
-          phx-debounce="20000"
+      <%= for playlist <- @playlists do %>
+        <div
           phx-click="click"
-          phx-value-name={{playlist.name}}
-          id={{"#{playlist.name}-div"}}
+          phx-value-name="<%=playlist.name%>"
+          id="<%= #{playlist.name}-div %>"
           class="tile is-parent"
         >
-          <PlaylistComponent playlist={{playlist}}/>
+          <%= live_component @socket, PlaylistComponent, playlist: playlist %>
         </div>
-      </div>
+      <%= end %>
     """
   end
 
