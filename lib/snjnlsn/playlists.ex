@@ -4,7 +4,7 @@ defmodule Snjnlsn.Playlists do
   """
   alias Snjnlsn.Playlists.Playlist
 
-  @type t() :: %__MODULE__{ items: [%Playlist{}] }
+  @type t() :: %__MODULE__{items: [%Playlist{}]}
   defstruct items: [%Playlist{}]
 
   @doc """

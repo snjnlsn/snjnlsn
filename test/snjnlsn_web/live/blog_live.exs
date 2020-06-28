@@ -11,7 +11,7 @@ defmodule SnjnlsnWeb.BlogLiveTest do
 
     test "renders each blog", %{conn: conn} do
       {:ok, _view, html} = live(conn, "/blog")
-      for post <- Blog.list_posts(), do: assert html =~ ~s(id=\"#{post.id}\")
+      for post <- Blog.list_posts(), do: assert(html =~ ~s(id=\"#{post.id}\"))
     end
   end
 end
