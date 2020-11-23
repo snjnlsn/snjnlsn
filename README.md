@@ -3,11 +3,17 @@
 To start:
 
 - Create a `config/secret.exs` with secret key configuration for phoenix and live_view like so:
+
   ```
     config :snjnlsn, SnjnlsnWeb.Endpoint,
-    secret_key_base: your_key_here,
-    live_view: [signing_salt: your_other?_key_here]
+      secret_key_base: your_key_here,
+      live_view: [signing_salt: your_other?_key_here]
+
+    config :ueberauth, Ueberauth.Strategy.Spotify.OAuth,
+      client_id: <ID FROM SPOTIFY>,
+      client_secret: <SECRET FROM SPOTIFY>
   ```
+
 - Install dependencies with `mix deps.get`
 - Create and migrate your database with `mix ecto.setup`
 - Install Node.js dependencies with `cd assets && yarn`
