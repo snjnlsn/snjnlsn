@@ -20,7 +20,7 @@ defmodule SnjnlsnWeb.Router do
 
   scope "/", SnjnlsnWeb do
     pipe_through [Ueberauth, SpotifyAuthPlug]
-    live "/playlists", PlaylistLive
+    live "/playlists", PlaylistLive, session: {SnjnlsnWeb.SessionHandler, :pull, []}
     # get "/playlists", SpotifyController, :request
     live "/blog", BlogLive
   end

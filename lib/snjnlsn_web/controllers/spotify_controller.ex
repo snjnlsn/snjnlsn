@@ -23,6 +23,7 @@ defmodule SnjnlsnWeb.SpotifyController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
+    IO.inspect(conn, label: "\n\n here we is \n\n")
     # %{
     #   assigns: %{
     #     ueberauth_auth: %Ueberauth.Auth{

@@ -26,9 +26,7 @@ config :logger, :console,
 # Configure Ueberauth for Spotify
 config :ueberauth, Ueberauth,
   providers: [
-    spotify:
-      {Ueberauth.Strategy.Spotify,
-       [default_scope: "playlist-read-private,playlist-modify-private"]}
+    spotify: {Ueberauth.Strategy.Spotify, [default_scope: ""]}
   ]
 
 # Use Jason for JSON parsing in Phoenix
