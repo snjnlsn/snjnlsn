@@ -10,7 +10,7 @@ defmodule SnjnlsnWeb.Modal do
   #   ~L"""
   #     <div class={{"modal", isActive: @show }}>
   #       <div class="modal-content">
-  #         {{ @inner_content.() }}
+  #         {{ render_block }}
   #       </div>
   #       <div class="modal-background"></div>
   #       <Button click="hide">im done</Button>
