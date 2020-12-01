@@ -11,7 +11,7 @@ defmodule SnjnlsnWeb.Button do
   def render(assigns) do
     ~L"""
     <button class="button {{ @kind }}" phx-click={{ @click }} style="margin: 0px 5px">
-      {{ @inner_content.() }}
+      {{ render_block }}
     </button>
     """
   end
