@@ -34,6 +34,14 @@ npm-debug.log
 # The directory NPM downloads your dependencies sources to.
 /assets/node_modules/
 
+# yarn 2
+/assets/.yarn/*
+/assets/!.yarn/releases
+/assets/!.yarn/plugins
+/assets/!.yarn/sdks
+/assets/!.yarn/versions
+/assets/.pnp.*
+
 # Since we are building assets from assets/,
 # we ignore priv/static. You may want to comment
 # this depending on your deployment strategy.

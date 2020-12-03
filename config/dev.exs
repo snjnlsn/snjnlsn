@@ -1,5 +1,7 @@
 use Mix.Config
 
+{webpack_path, _} = System.cmd("yarn", ["bin", "webpack"])
+
 # Configure your database
 config :snjnlsn, Snjnlsn.Repo,
   username: "postgres",
@@ -22,10 +24,11 @@ config :snjnlsn, SnjnlsnWeb.Endpoint,
   check_origin: false,
   watchers: [
     node: [
-      "node_modules/webpack/bin/webpack.js",
+      webpack_path,
       "--mode",
       "development",
-      "--watch-stdin",
+      "--watch",
+      "--watch-options-stdin",
       cd: Path.expand("../assets", __DIR__)
     ]
   ]
