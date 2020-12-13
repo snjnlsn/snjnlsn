@@ -32,8 +32,6 @@ defmodule SnjnlsnWeb.SpotifyController do
     #   }
     # } = conn
 
-    # IO.inspect(expiration, label: "heres your fucking \n\n\n CONN \n\n\n ")
-
     # TODO: remove auth from session if i can pull it off conn in liveview? ueberauth puts it there by default
 
     conn

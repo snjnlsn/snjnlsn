@@ -1,6 +1,6 @@
 use Mix.Config
 
-{webpack_path, _} = System.cmd("yarn", ["bin", "webpack"])
+# webpack_path = System.cmd("yarn", ["bin", "webpack"]) |> Kernel.elem(0) |> String.trim()
 
 # Configure your database
 config :snjnlsn, Snjnlsn.Repo,
@@ -24,7 +24,7 @@ config :snjnlsn, SnjnlsnWeb.Endpoint,
   check_origin: false,
   watchers: [
     node: [
-      webpack_path,
+      "node_modules/webpack/bin/webpack.js",
       "--mode",
       "development",
       "--watch",
