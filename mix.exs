@@ -34,6 +34,7 @@ defmodule Snjnlsn.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:bcrypt_elixir, "~> 2.0"},
       {:bypass, "~> 1.0", only: :test},
       {:credo, "~> 1.1", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
@@ -45,6 +46,7 @@ defmodule Snjnlsn.MixProject do
       {:jason, "~> 1.0"},
       {:phoenix, "~> 1.5.1"},
       {:phoenix_ecto, "~> 4.0"},
+      {:phx_gen_auth, "~> 0.6", only: [:dev], runtime: false},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.15.0"},

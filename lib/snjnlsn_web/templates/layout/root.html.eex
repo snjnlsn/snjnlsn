@@ -16,6 +16,7 @@
           <a class="navbar-item has-text-light" href="/playlists">Playlists</a>
       </div>
     </nav>
+    <%= render "_user_menu.html", assigns %>
     <section class="hero is-fullheight-with-navbar is-bold">
       <div class="hero-body">
         <div class="container">
