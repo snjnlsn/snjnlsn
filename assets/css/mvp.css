@@ -1,7 +1,3 @@
-/* This file is for your main application css. */
-
-@import "./phoenix.css";
-
 /* MVP.css v1.6.3 - https://github.com/andybrewer/mvp */
 
 :root {
@@ -34,8 +30,8 @@
     --color-accent: #0097fc4f;
     --color-bg: #333;
     --color-bg-secondary: #555;
-    --color-secondary: #e20de9;
-    --color-secondary-accent: #e20de94f;
+    --color-secondary: #e90d61;
+    --color-secondary-accent: #e90d694f;
     --color-shadow: #bbbbbb20;
     --color-text: #f7f7f7;
     --color-text-secondary: #aaa;
