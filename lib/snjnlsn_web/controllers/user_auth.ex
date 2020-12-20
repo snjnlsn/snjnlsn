@@ -122,6 +122,21 @@ defmodule SnjnlsnWeb.UserAuth do
   end
 
   @doc """
+  Used for routes that require the user to be an admin user.
+  """
+  def require_admin_user(conn, _opts) do
+    if conn.assigns[:current_user].admin do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You aren't authorized to access this page.")
+      |> maybe_store_return_to()
+      |> redirect(to: Routes.user_session_path(conn, :new))
+      |> halt()
+    end
+  end
+
+  @doc """
   Used for routes that require the user to be authenticated.
 
   If you want to enforce the user email is confirmed before

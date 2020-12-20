@@ -59,6 +59,12 @@ defmodule SnjnlsnWeb.Router do
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
   end
 
+  scope "/admin", SnjnlsnWeb do
+    pipe_through [:browser, :require_authenticated_user, :require_admin_user]
+
+    live "/evernote", EvernoteLive
+  end
+
   scope "/", SnjnlsnWeb do
     pipe_through [:browser]
 
