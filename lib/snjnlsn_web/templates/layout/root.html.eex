@@ -6,24 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Snjnlsn · Phoenix Framework</title>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+    <%# <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") "/> %>
   </head>
-  <body class="has-navbar-fixed-top">
-    <nav class="navbar is-fixed-top has-background-black-bis">
-      <div class="navbar-brand">
-          <a class="navbar-item has-text-light" href="/">Home</a>
-          <a class="navbar-item has-text-light" href="/na">Bad Link</a>
-          <a class="navbar-item has-text-light" href="/playlists">Playlists</a>
-      </div>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/playlists">Playlists</a></li>
+        <%= render "_user_menu.html", assigns %>
+      </ul>
     </nav>
-    <%= render "_user_menu.html", assigns %>
-    <section class="hero is-fullheight-with-navbar is-bold">
-      <div class="hero-body">
-        <div class="container">
-          <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-          <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-          <%= @inner_content %>
-        </div>
+    <section>
+      <div>
+        <p role="alert"><%= get_flash(@conn, :info) %></p>
+        <p role="alert"><%= get_flash(@conn, :error) %></p>
+        <%= @inner_content %>
       </div>
     </section>
      <%= csrf_meta_tag() %>
