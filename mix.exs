@@ -54,7 +54,9 @@ defmodule Snjnlsn.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:poison, "~> 3.1"},
       {:postgrex, ">= 0.0.0"},
-      {:ueberauth_spotify, "0.2.1"}
+      {:ueberauth_spotify, "0.2.1"},
+      {:mux, "~> 1.8.0"},
+      {:porcelain, "~> 2.0.3"}
     ]
   end
 

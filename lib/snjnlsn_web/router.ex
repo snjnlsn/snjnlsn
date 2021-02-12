@@ -63,6 +63,11 @@ defmodule SnjnlsnWeb.Router do
     pipe_through [:browser, :require_authenticated_user, :require_admin_user]
 
     live "/evernote", EvernoteLive
+    live "/recordings", RecordingLive.Index, :index
+    live "/recordings/new", RecordingLive.Index, :new
+    live "/recordings/:id/edit", RecordingLive.Index, :edit
+    live "/recordings/:id", RecordingLive.Show, :show
+    live "/recordings/:id/show/edit", RecordingLive.Show, :edit
   end
 
   scope "/", SnjnlsnWeb do
