@@ -9,27 +9,10 @@
     return_to: Routes.recording_index_path(@socket, :index) %>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="recordings">
-    <%= for recording <- @recordings do %>
-      <tr id="recording-<%= recording.id %>">
-        <td><%= recording.name %></td>
-
-        <td>
-          <span><%= live_redirect "Show", to: Routes.recording_show_path(@socket, :show, recording) %></span>
-          <span><%= live_patch "Edit", to: Routes.recording_index_path(@socket, :edit, recording) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: recording.id, data: [confirm: "Are you sure?"] %></span>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<span><%= live_patch "New Recording", to: Routes.recording_index_path(@socket, :new) %></span>
+<div class="controls">
+  <button type="button" id="mic">Get Microphone</button>
+  <%# <%= if @has_microphone do %> %>
+    <button type="button" phx-hook="StartMemo" id="record">Record</button>
+  <%# <% end %> %>
+</div>
+<ul id="recordings"></ul>

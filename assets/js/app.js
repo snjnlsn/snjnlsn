@@ -13,20 +13,29 @@ import "phoenix_html"
 import { Socket } from "phoenix"
 import LiveSocket from "phoenix_live_view"
 
+console.log(document, window)
+if ("MediaRecorder" in window) {
+  // everything is good, let's go ahead
+  alert("good")
+} else {
+  alert("bad")
+}
+
 const Hooks = {
   StartCamera: {
     mounted() {
+      console.log(document, window)
       let hook = this
-      const video = this.el
+      const audio = this.el
       navigator.mediaDevices
         .getUserMedia({
           audio: true,
-          video: true,
+          video: false,
         })
         .then((stream) => {
-          video.srcObject = stream
-          video.onloadedmetadata = (e) => {
-            video.play()
+          audio.srcObject = stream
+          audio.onloadedmetadata = (e) => {
+            audio.play()
             const mediaRecorder = new MediaRecorder(stream, {
               mimeType: "video/webm",
               videoBitsPerSecond: 3000000,
@@ -43,6 +52,19 @@ const Hooks = {
         })
     },
   },
+  StartMemo: {
+    mounted() {
+
+      /* i have to figure out how to make his synchronous in order for it to work as a hook (which i think is the move? maybe not) */
+      let hook = this;
+      console.log('hello')
+      const audio = this.el
+      if ('MediaRecorder' in window) {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false})
+        console.log(stream)
+      }
+    }
+  }
 }
 
 const csrfToken = document
