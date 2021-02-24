@@ -4,6 +4,8 @@ defmodule Snjnlsn.VoiceMemo.Recording do
 
   schema "recordings" do
     field :name, :string
+    field :uri, :string
+    belongs_to :song, Snjnlsn.VoiceMemo.Song
 
     timestamps()
   end
