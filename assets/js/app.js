@@ -13,12 +13,7 @@ import "phoenix_html"
 import { Socket } from "phoenix"
 import LiveSocket from "phoenix_live_view"
 
-function renderError(message) {
-  const wrapper = document.getElementById("errorMsg")
-  wrapper.innerHTML = `<div class="error"><p>${message}</p></div>`
-}
-
-function renderRecording(blob, list) {
+const renderRecording = (blob, list) => {
   const blobUrl = URL.createObjectURL(blob)
   const li = document.createElement("li")
   const audio = document.createElement("audio")
@@ -48,104 +43,75 @@ function renderRecording(blob, list) {
   list.appendChild(li)
 }
 
-const mic = document.getElementById("mic")
-
-let audioCtx, audioNode
-if ("MediaRecorder" in window && mic) {
-  const recordButton = document.getElementById("record"),
-    list = document.getElementById("recordings"),
-    codeBlock = document.getElementById("code-block")
-
-  mic.addEventListener("click", async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio: {
-          sampleRate: 48000,
-          echoCancellation: false,
-          noiseSuppression: false,
-        },
-        video: false,
-      })
-      const mimeType = "audio/aac"
-      const chunks = []
-      const recorder = new MediaRecorder(stream, {
-        type: mimeType,
-      })
-      recorder.addEventListener("dataavailable", (event) => {
-        if (typeof event.data === "undefined") return
-        if (event.data.size === 0) return
-        chunks.push(event.data)
-      })
-      recorder.addEventListener("stop", () => {
-        const recording = new Blob(chunks, {
-          type: mimeType,
-        })
-        renderRecording(recording, list)
-        chunks = []
-      })
-      recordButton.removeAttribute("hidden")
-      recordButton.addEventListener("click", () => {
-        if (recorder.state === "inactive") {
-          recorder.start()
-          recordButton.innerText = "Stop"
-        } else {
-          recorder.stop()
-          renderRecording(recording, list)
-          recordButton.innerText = "Record"
-        }
-      })
-      // codeBlock.innerHTML = stream
-    } catch {
-      renderError(
-        "You denied access to the microphone so this demo will not work."
-      )
-    }
-  })
-} else {
-  alert("bad")
-}
-
 const Hooks = {
-  StartCamera: {
+  VoiceMemo: {
     mounted() {
-      // console.log(document, window)
-      // let hook = this
-      // const audio = this.el
-      // navigator.mediaDevices
-      //   .getUserMedia({
-      //     audio: true,
-      //     video: false,
-      //   })
-      //   .then((stream) => {
-      //     audio.srcObject = stream
-      //     audio.onloadedmetadata = (e) => {
-      //       audio.play()
-      //       const mediaRecorder = new MediaRecorder(stream, {
-      //         mimeType: "video/webm",
-      //         videoBitsPerSecond: 3000000,
-      //       })
-      //       mediaRecorder.ondataavailable = (e) => {
-      //         const reader = new FileReader()
-      //         reader.onloadend = () => {
-      //           hook.pushEvent("video_data", { data: reader.result })
-      //         }
-      //         reader.readAsDataURL(e.data)
-      //       }
-      //       mediaRecorder.start(1000)
-      //     }
-      //   })
-    },
-  },
-  StartMemo: {
-    mounted() {
-      /* i have to figure out how to make his synchronous in order for it to work as a hook (which i think is the move? maybe not) */
-      //   let hook = this;
-      //   console.log('hello')
-      //   const audio = this.el
-      //   if ('MediaRecorder' in window) {
-      //     const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false})
-      //     console.log(stream)
-      //   }
+      const hook = this
+      this.handleEvent("record", (payload) =>
+        console.log(payload, "hey we got this cliqqq")
+      )
+      if ("MediaRecorder" in window) {
+        const recordButton = document.getElementById("record"),
+          mic = this.el,
+          list = document.getElementById("recordings")
+
+        mic.addEventListener("click", async () => {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+              audio: {
+                sampleRate: 48000,
+                echoCancellation: false,
+                noiseSuppression: false,
+              },
+              video: false,
+            })
+            const mimeType = "audio/aac"
+            let chunks = []
+            const recorder = new MediaRecorder(stream, {
+              type: mimeType,
+            })
+            recorder.addEventListener("dataavailable", (event) => {
+              if (typeof event.data === "undefined") return
+              if (event.data.size === 0) return
+              const reader = new FileReader()
+              reader.onloadend = () =>
+                hook.pushEvent("recieved", { data: reader.result })
+              reader.readAsDataURL(event.data)
+              chunks.push(event.data)
+            })
+            recorder.addEventListener("stop", () => {
+              const recording = new Blob(chunks, {
+                type: mimeType,
+              })
+              hook.pushEvent("done", { data: recording })
+              renderRecording(recording, list)
+              chunks = []
+            })
+            recordButton.removeAttribute("hidden")
+            recordButton.addEventListener("click", () => {
+              if (recorder.state === "inactive") {
+                recorder.start()
+                recordButton.innerText = "Stop"
+              } else {
+                recorder.stop()
+                renderRecording(recording, list)
+                recordButton.innerText = "Record"
+              }
+            })
+          } catch (error) {
+            this.pushEvent("cannot-record", { error }, (reply, _ref) =>
+              console.log(reply)
+            )
+          }
+        })
+      } else {
+        this.pushEvent(
+          "cannot-record",
+          { error: "no mediaRecorder" },
+          (reply, _ref) => console.log(reply)
+        )
+        alert("bad")
+      }
     },
   },
 }

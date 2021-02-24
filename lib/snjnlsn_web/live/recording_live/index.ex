@@ -40,6 +40,26 @@ defmodule SnjnlsnWeb.RecordingLive.Index do
     {:noreply, assign(socket, :recordings, list_recordings())}
   end
 
+  def handle_event("send-to-phx", params, socket) do
+    IO.inspect(params, label: "test")
+    {:noreply, push_event(socket, "record", %{valueMagic: "magicValue!"})}
+  end
+
+  def handle_event("recieved", params, socket) do
+    IO.inspect(params, label: "received")
+    {:noreply, socket}
+  end
+
+  def handle_event("done", params, socket) do
+    IO.inspect(params, label: "test")
+    {:noreply, socket}
+  end
+
+  def handle_event("cannot-record", params, socket) do
+    IO.inspect(params, label: "its so sad but honestly we cannot record")
+    {:noreply, socket}
+  end
+
   defp list_recordings do
     VoiceMemo.list_recordings()
   end
