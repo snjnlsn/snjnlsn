@@ -47,9 +47,6 @@ const Hooks = {
   VoiceMemo: {
     mounted() {
       const hook = this
-      this.handleEvent("record", (payload) =>
-        console.log(payload, "hey we got this cliqqq")
-      )
       if ("MediaRecorder" in window) {
         const recordButton = document.getElementById("record"),
           mic = this.el,
@@ -65,25 +62,25 @@ const Hooks = {
               },
               video: false,
             })
-            const mimeType = "audio/aac"
-            let chunks = []
+            const mimeType = "audio/wav"
+            let chunks = [],
+              recording
             const recorder = new MediaRecorder(stream, {
               type: mimeType,
             })
             recorder.addEventListener("dataavailable", (event) => {
               if (typeof event.data === "undefined") return
               if (event.data.size === 0) return
+              chunks.push(event.data)
+            })
+            recorder.addEventListener("stop", (event) => {
+              recording = new Blob(chunks, {
+                type: mimeType,
+              })
               const reader = new FileReader()
               reader.onloadend = () =>
                 hook.pushEvent("recieved", { data: reader.result })
-              reader.readAsDataURL(event.data)
-              chunks.push(event.data)
-            })
-            recorder.addEventListener("stop", () => {
-              const recording = new Blob(chunks, {
-                type: mimeType,
-              })
-              hook.pushEvent("done", { data: recording })
+              reader.readAsDataURL(recording)
               renderRecording(recording, list)
               chunks = []
             })
@@ -94,7 +91,7 @@ const Hooks = {
                 recordButton.innerText = "Stop"
               } else {
                 recorder.stop()
-                renderRecording(recording, list)
+                // renderRecording(recording, list)
                 recordButton.innerText = "Record"
               }
             })
