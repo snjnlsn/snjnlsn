@@ -46,13 +46,15 @@ const renderRecording = (blob, list) => {
 const Hooks = {
   VoiceMemo: {
     mounted() {
+      document.getElementById("errorMsg").innerText = "frick 2 from the hook"
       const hook = this
+      this.pushEvent("logging", { data: document })
       if ("MediaRecorder" in window) {
         const recordButton = document.getElementById("record"),
           mic = this.el,
           list = document.getElementById("recordings")
-
         mic.addEventListener("click", async () => {
+          this.pushEvent("logging", { data: document })
           try {
             const stream = await navigator.mediaDevices.getUserMedia({
               audio: {
@@ -62,11 +64,11 @@ const Hooks = {
               },
               video: false,
             })
-            const mimeType = "audio/wav"
+            const mimeType = "audio/webm"
             let chunks = [],
               recording
             const recorder = new MediaRecorder(stream, {
-              type: mimeType,
+              mimeType,
             })
             recorder.addEventListener("dataavailable", (event) => {
               if (typeof event.data === "undefined") return
@@ -96,6 +98,7 @@ const Hooks = {
               }
             })
           } catch (error) {
+            console.log(error)
             this.pushEvent("cannot-record", { error }, (reply, _ref) =>
               console.log(reply)
             )

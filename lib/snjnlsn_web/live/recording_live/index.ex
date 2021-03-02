@@ -47,15 +47,17 @@ defmodule SnjnlsnWeb.RecordingLive.Index do
 
   def handle_event("recieved", params, socket) do
     IO.inspect(params["data"], label: "dammit")
-    "data:audio/wav;base64," <> raw = params["data"]
+    "data:audio/webm;base64," <> raw = params["data"]
     IO.inspect(raw, label: "recieved raw")
-    File.write!("audio.wav", Base.decode64!(raw))
+    File.write!("rawfile", raw)
+    File.write!("audio.webm", Base.decode64!(raw))
     {:noreply, socket}
   end
 
-  # def handle_event("done", params, socket) do
-  #   {:noreply, socket}
-  # end
+  def handle_event("logging", params, socket) do
+    IO.inspect(params, label: "logging")
+    {:noreply, socket}
+  end
 
   def handle_event("cannot-record", params, socket) do
     IO.inspect(params, label: "its so sad but honestly we cannot record")
