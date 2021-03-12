@@ -14,6 +14,8 @@
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/playlists">Playlists</a></li>
+        <li><a href="/admin/recordings">Voice Memos</a></li>
+        <li><a href="phoenix/live_reload/socket/websocket?vsn=2.0.0">Socket Debug</a></li>
         <%= render "_user_menu.html", assigns %>
       </ul>
     </nav>

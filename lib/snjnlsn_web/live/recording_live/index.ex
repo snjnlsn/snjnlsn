@@ -45,12 +45,22 @@ defmodule SnjnlsnWeb.RecordingLive.Index do
     {:noreply, push_event(socket, "record", %{valueMagic: "magicValue!"})}
   end
 
-  def handle_event("recieved", params, socket) do
-    IO.inspect(params["data"], label: "dammit")
-    "data:audio/webm;base64," <> raw = params["data"]
-    IO.inspect(raw, label: "recieved raw")
-    File.write!("rawfile", raw)
+  def handle_event("recieved", %{"mimeType" => "audio/mp4", "data" => data}, socket) do
+    IO.inspect(data, label: "raw")
+    "data:audio/mp4;base64," <> raw = data
+    File.write!("audio.mp4", Base.decode64!(raw))
+    {:noreply, socket}
+  end
+
+  def handle_event("recieved", %{"mimeType" => "audio/webm", "data" => data}, socket) do
+    IO.inspect(data, label: "raw")
+    "data:audio/webm;base64," <> raw = data
     File.write!("audio.webm", Base.decode64!(raw))
+    {:noreply, socket}
+  end
+
+  def handle_event("recieved", %{"data" => data}, socket) do
+    IO.inspect(data, label: "raw unmatched")
     {:noreply, socket}
   end
 

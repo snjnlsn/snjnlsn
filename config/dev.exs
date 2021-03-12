@@ -19,14 +19,15 @@ config :snjnlsn, Snjnlsn.Repo,
 # with webpack to recompile .js and .css sources.
 config :snjnlsn, SnjnlsnWeb.Endpoint,
   http: [port: 4000],
-  force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  https: [
-    port: 4001,
-    cipher_suite: :strong,
-    otp_app: :snjnlsn,
-    certfile: "priv/cert/selfsigned.pem",
-    keyfile: "priv/cert/selfsigned_key.pem"
-  ],
+  url: [scheme: "https", host: {:system, "HOST"}, port: "443"],
+  # force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  # https: [
+  #   port: 4001,
+  #   cipher_suite: :strong,
+  #   otp_app: :snjnlsn,
+  #   certfile: "priv/cert/selfsigned.pem",
+  #   keyfile: "priv/cert/selfsigned_key.pem"
+  # ],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,

@@ -43,33 +43,43 @@ const renderRecording = (blob, list) => {
   list.appendChild(li)
 }
 
+const setDocument = (message) =>
+  (document.getElementById("errorMsg").innerText =
+    document.getElementById("errorMsg").innerText + message)
+
 const Hooks = {
   VoiceMemo: {
     mounted() {
-      document.getElementById("errorMsg").innerText = "frick 2 from the hook"
+      setDocument("mounted")
       const hook = this
-      this.pushEvent("logging", { data: document })
+      if ("MediaRecorder" in window) {
+        setDocument("it is")
+      } else {
+        setDocument("it not")
+      }
       if ("MediaRecorder" in window) {
         const recordButton = document.getElementById("record"),
           mic = this.el,
           list = document.getElementById("recordings")
         mic.addEventListener("click", async () => {
-          this.pushEvent("logging", { data: document })
           try {
+            const mimeType = [
+              // "audio/mp3",
+              // "audio/mpeg",
+              "audio/mp4",
+              "audio/webm",
+            ].filter(MediaRecorder.isTypeSupported)[0]
+            setDocument(mimeType)
             const stream = await navigator.mediaDevices.getUserMedia({
               audio: {
-                sampleRate: 48000,
                 echoCancellation: false,
                 noiseSuppression: false,
               },
               video: false,
             })
-            const mimeType = "audio/webm"
             let chunks = [],
               recording
-            const recorder = new MediaRecorder(stream, {
-              mimeType,
-            })
+            const recorder = new MediaRecorder(stream)
             recorder.addEventListener("dataavailable", (event) => {
               if (typeof event.data === "undefined") return
               if (event.data.size === 0) return
@@ -81,7 +91,7 @@ const Hooks = {
               })
               const reader = new FileReader()
               reader.onloadend = () =>
-                hook.pushEvent("recieved", { data: reader.result })
+                hook.pushEvent("recieved", { data: reader.result, mimeType })
               reader.readAsDataURL(recording)
               renderRecording(recording, list)
               chunks = []
@@ -105,13 +115,27 @@ const Hooks = {
           }
         })
       } else {
-        this.pushEvent(
-          "cannot-record",
-          { error: "no mediaRecorder" },
-          (reply, _ref) => console.log(reply)
-        )
-        alert("bad")
+        // this.pushEvent(
+        //   "cannot-record",
+        //   { error: "no mediaRecorder" },
+        //   (reply, _ref) => console.log(reply)
+        // )
       }
+    },
+    beforeUpdate() {
+      setDocument("beforeUpdate")
+    },
+    updated() {
+      setDocument("updated")
+    },
+    destroyed() {
+      setDocument("destroyed")
+    },
+    disconnected() {
+      setDocument("disconnected")
+    },
+    reconnected() {
+      setDocument("reconnected")
     },
   },
 }
