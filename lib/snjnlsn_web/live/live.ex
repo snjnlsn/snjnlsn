@@ -11,7 +11,6 @@ defmodule SnjnlsnWeb.Live do
 
   def render(assigns) do
     ~L"""
-    <div>filler content!</div>
     """
   end
 
