@@ -12,6 +12,10 @@ Certain features require secure HTTPS/SSL. For local development, [`ngrok`](http
     config :ueberauth, Ueberauth.Strategy.Spotify.OAuth,
       client_id: <ID FROM SPOTIFY>,
       client_secret: <SECRET FROM SPOTIFY>
+
+    config :snjnlsn,
+      goth_dev: PATH_TO_NONPROD_GOOGLE_SERVICE_ACCT,
+      goth_prop: PATH_TO_PROD_GOOGLE_SERVICE_ACCT
   ```
 
 - Install dependencies with `mix deps.get`

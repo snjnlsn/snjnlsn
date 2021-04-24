@@ -10,6 +10,7 @@
 # security
 /config/secret.exs
 /config/prod.secret.exs
+/config/snjnlsn-dev-goth.json
 
 # Where 3rd-party dependencies like ExDoc output generated docs.
 /doc/
@@ -47,3 +48,5 @@ npm-debug.log
 # this depending on your deployment strategy.
 /priv/static/
 /priv/cert/
+
+.DS_stores

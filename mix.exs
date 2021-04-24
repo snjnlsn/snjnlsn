@@ -56,7 +56,9 @@ defmodule Snjnlsn.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:ueberauth_spotify, "0.2.1"},
       {:mux, "~> 1.8.0"},
-      {:porcelain, "~> 2.0.3"}
+      {:porcelain, "~> 2.0.3"},
+      {:goth, "1.3.0-rc.2"},
+      {:google_api_storage, "~> 0.29.0"}
     ]
   end
 

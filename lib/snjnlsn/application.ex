@@ -5,14 +5,18 @@ defmodule Snjnlsn.Application do
 
   use Application
 
-  def start(_type, args) do
+  def start(_type, _args) do
+    goth_creds = Application.get_env(:snjnlsn, :goth_dev) |> File.read!() |> Jason.decode!()
+    source = {:service_account, goth_creds, []}
+
     children = [
       # Start the Ecto repository
       Snjnlsn.Repo,
       # Start the endpoint when the application starts
-      SnjnlsnWeb.Endpoint
+      SnjnlsnWeb.Endpoint,
       # Starts a worker by calling: Snjnlsn.Worker.start_link(arg)
       # {Snjnlsn.Worker, arg},
+      {Goth, name: Snjnlsn.Goth, source: source}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
