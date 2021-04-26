@@ -3,7 +3,7 @@ defmodule SnjnlsnWeb.RecordingLiveTest do
 
   import Phoenix.LiveViewTest
 
-  alias Snjnlsn.VoiceMemo
+  alias Snjnlsn.Songwriter
 
   @create_attrs %{name: "some name"}
   @update_attrs %{name: "some updated name"}

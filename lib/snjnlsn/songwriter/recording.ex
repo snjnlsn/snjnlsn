@@ -1,11 +1,11 @@
-defmodule Snjnlsn.VoiceMemo.Recording do
+defmodule Snjnlsn.Songwriter.Recording do
   use Ecto.Schema
   import Ecto.Changeset
 
   schema "recordings" do
     field :name, :string
     field :uri, :string
-    belongs_to :song, Snjnlsn.VoiceMemo.Song
+    belongs_to :song, Snjnlsn.Songwriter.Song
 
     timestamps()
   end

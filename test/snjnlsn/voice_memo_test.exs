@@ -1,10 +1,10 @@
-defmodule Snjnlsn.VoiceMemoTest do
+defmodule Snjnlsn.SongwriterTest do
   use Snjnlsn.DataCase
 
-  alias Snjnlsn.VoiceMemo
+  alias Snjnlsn.Songwriter
 
   describe "recordings" do
-    alias Snjnlsn.VoiceMemo.Recording
+    alias Snjnlsn.Songwriter.Recording
 
     @valid_attrs %{name: "some name"}
     @update_attrs %{name: "some updated name"}
@@ -40,7 +40,10 @@ defmodule Snjnlsn.VoiceMemoTest do
 
     test "update_recording/2 with valid data updates the recording" do
       recording = recording_fixture()
-      assert {:ok, %Recording{} = recording} = VoiceMemo.update_recording(recording, @update_attrs)
+
+      assert {:ok, %Recording{} = recording} =
+               VoiceMemo.update_recording(recording, @update_attrs)
+
       assert recording.name == "some updated name"
     end
 

@@ -1,7 +1,7 @@
 defmodule SnjnlsnWeb.RecordingLive.FormComponent do
   use SnjnlsnWeb, :live_component
 
-  alias Snjnlsn.VoiceMemo
+  alias Snjnlsn.Songwriter
 
   @impl true
   def update(%{recording: recording} = assigns, socket) do

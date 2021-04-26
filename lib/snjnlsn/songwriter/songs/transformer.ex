@@ -1,4 +1,4 @@
-defmodule Snjnlsn.VoiceMemo.Song.Transformer do
+defmodule Snjnlsn.Songwriter.Song.Transformer do
   def randomize_lines(text),
     do:
       text

@@ -13,6 +13,10 @@ defmodule Snjnlsn.Accounts.User do
     timestamps()
   end
 
+  def admin_changeset(user) do
+    user |> cast(%{admin: true}, [:admin])
+  end
+
   @doc """
   A user changeset for registration.
 

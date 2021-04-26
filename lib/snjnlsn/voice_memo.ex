@@ -1,4 +1,4 @@
-defmodule Snjnlsn.VoiceMemo do
+defmodule Snjnlsn.Songwriter do
   @moduledoc """
   The VoiceMemo context.
   """
@@ -6,7 +6,7 @@ defmodule Snjnlsn.VoiceMemo do
   import Ecto.Query, warn: false
   alias Snjnlsn.Repo
 
-  alias Snjnlsn.VoiceMemo.Recording
+  alias Snjnlsn.Songwriter.Recording
 
   @doc """
   Returns the list of recordings.

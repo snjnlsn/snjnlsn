@@ -184,6 +184,24 @@ defmodule Snjnlsn.Accounts do
   end
 
   @doc """
+  Updates a user to have admin access
+
+  ## Examples
+
+      iex> make_user_admin(user)
+      {:ok, %User{}}
+
+      iex> make_user_admin(user)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def make_user_admin(user) do
+    changeset = User.admin_changeset(user)
+
+    Repo.update!(changeset)
+  end
+
+  @doc """
   Updates the user password.
 
   ## Examples

@@ -1,7 +1,7 @@
 defmodule SnjnlsnWeb.RecordingLive.Show do
   use SnjnlsnWeb, :live_view
 
-  alias Snjnlsn.VoiceMemo
+  alias Snjnlsn.Songwriter
 
   @impl true
   def mount(_params, _session, socket) do
