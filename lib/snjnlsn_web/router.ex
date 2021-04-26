@@ -60,8 +60,8 @@ defmodule SnjnlsnWeb.Router do
   end
 
   scope "/admin", SnjnlsnWeb do
-    # pipe_through [:browser, :require_authenticated_user, :require_admin_user]
-    pipe_through :browser
+    pipe_through [:browser, :require_authenticated_user, :require_admin_user]
+    # pipe_through :browser (for testing w/o auth)
 
     live "/evernote", EvernoteLive
     live "/recordings", RecordingLive.Index, :index
