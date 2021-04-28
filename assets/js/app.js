@@ -48,7 +48,7 @@ const setDocument = (message) =>
     document.getElementById("errorMsg").innerText + message)
 
 const Hooks = {
-  VoiceMemo: {
+  Songwriter: {
     mounted() {
       setDocument("mounted")
       const hook = this

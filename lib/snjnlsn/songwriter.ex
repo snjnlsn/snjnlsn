@@ -1,6 +1,6 @@
 defmodule Snjnlsn.Songwriter do
   @moduledoc """
-  The VoiceMemo context.
+  The Songwriter context.
   """
 
   import Ecto.Query, warn: false

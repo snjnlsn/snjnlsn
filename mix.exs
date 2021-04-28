@@ -58,7 +58,8 @@ defmodule Snjnlsn.MixProject do
       {:mux, "~> 1.8.0"},
       {:porcelain, "~> 2.0.3"},
       {:goth, "1.3.0-rc.2"},
-      {:google_api_storage, "~> 0.29.0"}
+      {:google_api_storage, "~> 0.29.0"},
+      {:zarex, "~> 1.0"}
     ]
   end
 

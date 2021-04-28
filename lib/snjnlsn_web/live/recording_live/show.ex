@@ -13,7 +13,7 @@ defmodule SnjnlsnWeb.RecordingLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:recording, VoiceMemo.get_recording!(id))}
+     |> assign(:recording, Songwriter.get_recording!(id))}
   end
 
   defp page_title(:show), do: "Show Recording"

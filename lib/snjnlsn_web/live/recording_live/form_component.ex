@@ -5,7 +5,7 @@ defmodule SnjnlsnWeb.RecordingLive.FormComponent do
 
   @impl true
   def update(%{recording: recording} = assigns, socket) do
-    changeset = VoiceMemo.change_recording(recording)
+    changeset = Songwriter.change_recording(recording)
 
     {:ok,
      socket
@@ -17,7 +17,7 @@ defmodule SnjnlsnWeb.RecordingLive.FormComponent do
   def handle_event("validate", %{"recording" => recording_params}, socket) do
     changeset =
       socket.assigns.recording
-      |> VoiceMemo.change_recording(recording_params)
+      |> Songwriter.change_recording(recording_params)
       |> Map.put(:action, :validate)
 
     {:noreply, assign(socket, :changeset, changeset)}
@@ -28,7 +28,7 @@ defmodule SnjnlsnWeb.RecordingLive.FormComponent do
   end
 
   defp save_recording(socket, :edit, recording_params) do
-    case VoiceMemo.update_recording(socket.assigns.recording, recording_params) do
+    case Songwriter.update_recording(socket.assigns.recording, recording_params) do
       {:ok, _recording} ->
         {:noreply,
          socket
@@ -41,7 +41,7 @@ defmodule SnjnlsnWeb.RecordingLive.FormComponent do
   end
 
   defp save_recording(socket, :new, recording_params) do
-    case VoiceMemo.create_recording(recording_params) do
+    case Songwriter.create_recording(recording_params) do
       {:ok, _recording} ->
         {:noreply,
          socket

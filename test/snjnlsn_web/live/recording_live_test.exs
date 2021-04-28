@@ -10,7 +10,7 @@ defmodule SnjnlsnWeb.RecordingLiveTest do
   @invalid_attrs %{name: nil}
 
   defp fixture(:recording) do
-    {:ok, recording} = VoiceMemo.create_recording(@create_attrs)
+    {:ok, recording} = Songwriter.create_recording(@create_attrs)
     recording
   end
 

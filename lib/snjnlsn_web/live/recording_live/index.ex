@@ -17,7 +17,7 @@ defmodule SnjnlsnWeb.RecordingLive.Index do
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
     |> assign(:page_title, "Edit Recording")
-    |> assign(:recording, VoiceMemo.get_recording!(id))
+    |> assign(:recording, Songwriter.get_recording!(id))
   end
 
   defp apply_action(socket, :new, _params) do
@@ -34,8 +34,8 @@ defmodule SnjnlsnWeb.RecordingLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    recording = VoiceMemo.get_recording!(id)
-    {:ok, _} = VoiceMemo.delete_recording(recording)
+    recording = Songwriter.get_recording!(id)
+    {:ok, _} = Songwriter.delete_recording(recording)
 
     {:noreply, assign(socket, :recordings, list_recordings())}
   end
@@ -45,17 +45,19 @@ defmodule SnjnlsnWeb.RecordingLive.Index do
     {:noreply, push_event(socket, "record", %{valueMagic: "magicValue!"})}
   end
 
-  def handle_event("recieved", %{"mimeType" => "audio/mp4", "data" => data}, socket) do
-    IO.inspect(data, label: "raw")
-    "data:audio/mp4;base64," <> raw = data
-    File.write!("audio.mp4", Base.decode64!(raw))
+  def handle_event("recieved", audio_params, socket) do
+    # IO.inspect(data, label: "raw")
+    # {:ok, stuff} = Songwriter.post_audio(audio_params)
+
+    # "data:audio/mp4;base64," <> raw = data
+    # File.write!("audio.mp4", Base.decode64!(raw))
     {:noreply, socket}
   end
 
   def handle_event("recieved", %{"mimeType" => "audio/webm", "data" => data}, socket) do
-    IO.inspect(data, label: "raw")
-    "data:audio/webm;base64," <> raw = data
-    File.write!("audio.webm", Base.decode64!(raw))
+    # IO.inspect(data, label: "raw")
+    # "data:audio/webm;base64," <> raw = data
+    # File.write!("audio.webm", Base.decode64!(raw))
     {:noreply, socket}
   end
 
@@ -75,6 +77,6 @@ defmodule SnjnlsnWeb.RecordingLive.Index do
   end
 
   defp list_recordings do
-    VoiceMemo.list_recordings()
+    Songwriter.list_recordings()
   end
 end
