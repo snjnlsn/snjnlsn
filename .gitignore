@@ -11,6 +11,7 @@
 /config/secret.exs
 /config/prod.secret.exs
 /config/snjnlsn-dev-goth.json
+/config/snjnlsn-prod-goth.json
 
 # Where 3rd-party dependencies like ExDoc output generated docs.
 /doc/

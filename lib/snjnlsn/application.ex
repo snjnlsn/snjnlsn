@@ -6,7 +6,7 @@ defmodule Snjnlsn.Application do
   use Application
 
   def start(_type, _args) do
-    goth_creds = Application.get_env(:snjnlsn, :goth_dev) |> File.read!() |> Jason.decode!()
+    goth_creds = Application.get_env(:snjnlsn, :goth) |> File.read!() |> Jason.decode!()
     source = {:service_account, goth_creds, []}
 
     children = [
