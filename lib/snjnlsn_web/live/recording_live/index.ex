@@ -2,6 +2,7 @@ defmodule SnjnlsnWeb.RecordingLive.Index do
   use SnjnlsnWeb, :live_view
 
   alias Snjnlsn.Songwriter
+  alias Snjnlsn.Songwriter
   alias Snjnlsn.Songwriter.Recording
 
   @impl true
@@ -40,34 +41,18 @@ defmodule SnjnlsnWeb.RecordingLive.Index do
     {:noreply, assign(socket, :recordings, list_recordings())}
   end
 
-  def handle_event("send-to-phx", params, socket) do
-    # IO.inspect(params, label: "test")
-    {:noreply, push_event(socket, "record", %{valueMagic: "magicValue!"})}
-  end
+  # def handle_event("send-to-phx", params, socket) do
+  #   # IO.inspect(params, label: "test")
+  #   {:noreply, push_event(socket, "record", %{valueMagic: "magicValue!"})}
+  # end
 
   def handle_event("recieved", audio_params, socket) do
     # IO.inspect(data, label: "raw")
     # {:ok, stuff} = Songwriter.post_audio(audio_params)
+    Songwriter.post_recording(audio_params)
 
     # "data:audio/mp4;base64," <> raw = data
     # File.write!("audio.mp4", Base.decode64!(raw))
-    {:noreply, socket}
-  end
-
-  def handle_event("recieved", %{"mimeType" => "audio/webm", "data" => data}, socket) do
-    # IO.inspect(data, label: "raw")
-    # "data:audio/webm;base64," <> raw = data
-    # File.write!("audio.webm", Base.decode64!(raw))
-    {:noreply, socket}
-  end
-
-  def handle_event("recieved", %{"data" => data}, socket) do
-    IO.inspect(data, label: "raw unmatched")
-    {:noreply, socket}
-  end
-
-  def handle_event("logging", params, socket) do
-    IO.inspect(params, label: "logging")
     {:noreply, socket}
   end
 

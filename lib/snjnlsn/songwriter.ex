@@ -8,6 +8,7 @@ defmodule Snjnlsn.Songwriter do
 
   alias Snjnlsn.Songwriter.Recording
 
+  @spec list_recordings :: any
   @doc """
   Returns the list of recordings.
 
@@ -19,6 +20,14 @@ defmodule Snjnlsn.Songwriter do
   """
   def list_recordings do
     Repo.all(Recording)
+  end
+
+  @spec post_recording(map()) :: map()
+  @doc """
+  saves received .mp4 or .webm audio to cloud storage with reference in database
+  """
+  def post_recording(map) do
+    Recording.save(map)
   end
 
   @doc """

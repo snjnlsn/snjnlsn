@@ -4,36 +4,42 @@ defmodule Snjnlsn.Songwriter.Recording do
   alias Snjnlsn.Repo
 
   schema "recordings" do
-    field :name, :string
     field :uri, :string
+    field :name, :string
     belongs_to :song, Snjnlsn.Songwriter.Song
 
     timestamps()
   end
 
-  def save(%{"name" => name} = map) do
-    filename =
-      "#{name |> String.replace(" ", "_")}_#{DateTime.utc_now() |> DateTime.to_string()}"
-      |> Zarex.sanitize()
-
-    {:ok, filepath} = write_temp_audio(map, filename)
-
-    {:ok, obj} = upload_audio(filepath, filename)
-
-    {:ok, _result} = insert_to_repo(obj[:name], name)
-
-    File.rm_rf(filepath)
+  def recording_filename(%{name: name}) do
+    # todo: make this a changeset validation
+    "#{name |> String.replace(" ", "_")}_#{DateTime.utc_now() |> DateTime.to_string()}"
+    |> Zarex.sanitize()
   end
 
-  defp insert_to_repo(gcs_name, name) do
+  def recording_filename(_unmatched) do
+    # todo: make this a changeset validation
+    "#{DateTime.utc_now() |> DateTime.to_string()}"
+    |> Zarex.sanitize()
+  end
+
+  def save(map) do
+    filename = recording_filename(map)
+    {:ok, filepath} = write_temp_audio(map, filename)
+    {:ok, %{name: name}} = upload_audio(filepath, filename)
+    {:ok, result} = insert_to_repo(name)
+    {:ok, _dont_care} = File.rm_rf(filepath)
+    {:ok, result}
+  end
+
+  defp insert_to_repo(name) do
     changeset(%__MODULE__{}, %{
-      gcs_name: gcs_name,
       name: name
     })
     |> Repo.insert()
   end
 
-  defp upload_audio(filepath, filename) do
+  def upload_audio(local_path, name) do
     {:ok, t} = Goth.fetch(Snjnlsn.Goth)
     conn = GoogleApi.Storage.V1.Connection.new(t.token)
     {:ok, env} = Application.fetch_env(:snjnlsn, __MODULE__)
@@ -42,15 +48,15 @@ defmodule Snjnlsn.Songwriter.Recording do
       conn,
       env[:gcs_bucket_id],
       "multipart",
-      %{name: filename},
-      filepath
+      %{name: name},
+      local_path
     )
   end
 
   @doc false
   def changeset(recording, attrs) do
     recording
-    |> cast(attrs, [:name, :gcs_name])
+    |> cast(attrs, [:name])
     |> validate_required([:name])
   end
 
