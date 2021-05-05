@@ -15,7 +15,7 @@ Certain features require secure HTTPS/SSL. For local development, [`ngrok`](http
       client_id: <ID FROM SPOTIFY>,
       client_secret: <SECRET FROM SPOTIFY>
 
-    config :snjnlsn,
+    config :snjnlsn, Snjnlsn.Songwriter.Recording,
       goth: PATH_TO_NONPROD_GOOGLE_SERVICE_ACCT,
   ```
 

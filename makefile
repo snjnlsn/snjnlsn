@@ -4,4 +4,4 @@ NGROK_HOST := $$(curl --silent http://127.0.0.1:4040/api/tunnels | jq '.tunnels[
 .PHONY: serve-ngrok
 serve-ngrok: ## Start Phoenix bound to ngrok address
 	@echo "🌍 Exposing My App @ https://$(NGROK_HOST)"
-	env HOST=$(NGROK_HOST) mix phx.server
+	env HOSTY=$(NGROK_HOST) mix phx.server

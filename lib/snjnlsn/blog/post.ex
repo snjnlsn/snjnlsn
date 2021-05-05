@@ -1,7 +1,6 @@
 defmodule Snjnlsn.Blog.Post do
   @enforce_keys [:id, :author, :title, :body, :description, :date]
   defstruct [:id, :author, :title, :body, :description, :date]
-  require IEx
 
   def parse!(filename) do
     [year, month_day_id] = filename |> Path.split() |> Enum.take(-2)

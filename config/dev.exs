@@ -19,7 +19,9 @@ config :snjnlsn, Snjnlsn.Repo,
 # with webpack to recompile .js and .css sources.
 config :snjnlsn, SnjnlsnWeb.Endpoint,
   http: [port: 4000],
-  url: [scheme: "https", host: {:system, "HOST"}, port: "443"],
+  # for iex -s mix / pry stuff
+  # url: [scheme: "https", host: "https://de5bbf6adabe.ngrok.io", port: "443"],
+  url: [scheme: "https", host: {:system, "HOSTY"}, port: "443"],
   # force_ssl: [rewrite_on: [:x_forwarded_proto]],
   # https: [
   #   port: 4001,

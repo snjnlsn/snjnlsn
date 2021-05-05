@@ -61,13 +61,14 @@ defmodule Snjnlsn.Songwriter.Recording do
   end
 
   defp write_temp_audio(%{"mimeType" => "audio/webm", "data" => data}, filename) do
-    "data:audio/webm;base64" <> raw = data
+    IO.inspect(data, label: "\n\n data \n\n")
+    "data:audio/webm;base64," <> raw = data
     File.write!("./assets/audio/#{filename}.webm", Base.decode64!(raw))
     {:ok, "./assets/audio/#{filename}.webm"}
   end
 
   defp write_temp_audio(%{"mimeType" => "audio/mp4", "data" => data}, filename) do
-    "data:audio/mp4;base64" <> raw = data
+    "data:audio/mp4;base64," <> raw = data
     File.write!("./assets/audio/#{filename}.mp4", Base.decode64!(raw))
     {:ok, "./assets/audio/#{filename}.mp4"}
   end

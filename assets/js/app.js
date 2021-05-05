@@ -16,25 +16,25 @@ let channel = socket.channel("room:lobby", {});
 let chatInput = document.querySelector("#chat-input");
 let messagesContainer = document.querySelector("#messages");
 
-chatInput.addEventListener("keypress", (event) => {
-  if (event.keyCode === 13) {
-    channel.push("new_msg", { body: chatInput.value });
-    chatInput.value = "";
-  }
-});
+// chatInput.addEventListener("keypress", (event) => {
+//   if (event.keyCode === 13) {
+//     channel.push("new_msg", { body: chatInput.value });
+//     chatInput.value = "";
+//   }
+// });
 
-channel.on("new_msg", (payload) => {
-  const messageItem = document.createElement("li");
-  messageItem.innerText = `[${Date()}] ${payload.body}`;
-  messagesContainer.appendChild(messageItem);
-});
+// channel.on("new_msg", (payload) => {
+//   const messageItem = document.createElement("li");
+//   messageItem.innerText = `[${Date()}] ${payload.body}`;
+//   messagesContainer.appendChild(messageItem);
+// });
 
-channel
-  .join()
-  .receive("ok", (resp) => {})
-  .receive("error", (resp) => {
-    console.error("Unable to join", resp);
-  });
+// channel
+//   .join()
+//   .receive("ok", (resp) => {})
+//   .receive("error", (resp) => {
+//     console.error("Unable to join", resp);
+//   });
 
 export default socket;
 

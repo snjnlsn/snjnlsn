@@ -2,23 +2,21 @@ defmodule Snjnlsn.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
-  require IEx
   use Application
 
   def start(_type, _args) do
-    IEx.pry()
     goth_creds = Application.get_env(:snjnlsn, :goth) |> File.read!() |> Jason.decode!()
     source = {:service_account, goth_creds, []}
 
     children = [
       # Start the Ecto repository
       Snjnlsn.Repo,
-      # Start the endpoint when the application starts
-      SnjnlsnWeb.Endpoint,
       # Starts a worker by calling: Snjnlsn.Worker.start_link(arg)
       # {Snjnlsn.Worker, arg},
       {Phoenix.PubSub, [name: Snjnlsn.PubSub, adapter: Phoenix.PubSub.PG2]},
-      {Goth, name: Snjnlsn.Goth, source: source}
+      {Goth, name: Snjnlsn.Goth, source: source},
+      # Start the endpoint when the application starts
+      SnjnlsnWeb.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

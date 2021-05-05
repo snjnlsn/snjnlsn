@@ -3,7 +3,6 @@ defmodule SnjnlsnWeb.Live do
   alias SnjnlsnWeb.Modal
   alias SnjnlsnWeb.Button
   alias SnjnlsnWeb.AOTY
-  require IEx
 
   def mount(_, _, socket) do
     {:ok, socket}
