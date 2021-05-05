@@ -2,9 +2,11 @@
 
 Certain features require secure HTTPS/SSL. For local development, [`ngrok`](https://ngrok.com/) is reccomended. I've attached a makefile for brevity.
 
-- Create a `config/secret.exs` with secret key configuration for phoenix and live_view like so:
+- Create a `config/secret.exs` and `config/prod.secret.exs` with required configuration like so:
 
   ```
+    use Mix.Config
+
     config :snjnlsn, SnjnlsnWeb.Endpoint,
       secret_key_base: your_key_here,
       live_view: [signing_salt: your_other?_key_here]
@@ -14,8 +16,7 @@ Certain features require secure HTTPS/SSL. For local development, [`ngrok`](http
       client_secret: <SECRET FROM SPOTIFY>
 
     config :snjnlsn,
-      goth_dev: PATH_TO_NONPROD_GOOGLE_SERVICE_ACCT,
-      goth_prop: PATH_TO_PROD_GOOGLE_SERVICE_ACCT
+      goth: PATH_TO_NONPROD_GOOGLE_SERVICE_ACCT,
   ```
 
 - Install dependencies with `mix deps.get`
