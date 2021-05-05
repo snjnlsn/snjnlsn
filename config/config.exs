@@ -16,7 +16,9 @@ config :snjnlsn,
 config :snjnlsn, SnjnlsnWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [view: SnjnlsnWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Snjnlsn.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub_server: Snjnlsn.PubSub
+
+# pubsub: [name: Snjnlsn.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,

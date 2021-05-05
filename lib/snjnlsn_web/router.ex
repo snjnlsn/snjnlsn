@@ -28,6 +28,7 @@ defmodule SnjnlsnWeb.Router do
 
   scope "/", SnjnlsnWeb do
     pipe_through :browser
+    get "/chat", PageController, :index
     live "/", Live
   end
 
