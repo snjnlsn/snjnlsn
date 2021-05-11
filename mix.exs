@@ -36,7 +36,7 @@ defmodule Snjnlsn.MixProject do
     [
       {:bcrypt_elixir, "~> 2.0"},
       {:bypass, "~> 1.0", only: :test},
-      {:credo, "~> 1.1", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:earmark, "~> 1.3"},
       {:ecto_sql, "~> 3.1"},
