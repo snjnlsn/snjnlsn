@@ -10,9 +10,18 @@
 <% end %>
 
 <div class="controls">
-  <%# <button type="button" id="mic">Get Microphone</button> %>
-  <button type="button" id="record" hidden>Record</button>
-  <button id="mic" phx-click="send-to-phx" phx-hook="Songwriter">Click Me for Hook</button>
+  <%= if @recording_enabled do %>
+    <%= if @recording_active do %>
+      <button type="button" id="quick-save">Quick Save</button>
+      <button type="button" id="stop">Create Song</button>
+    <% else %>
+      <button type="button" id="record">Record</button>
+    <% end %>
+  <% else %>
+  <%# <button type="button" id="record">Record</button> %>
+  <%# I wonder if this breaks things since it's in an 'else' statement - that might remove the hook? %>
+    <button id="mic" phx-hook="Songwriter">Enable Recording</button>
+  <% end %>
 </div>
 
 

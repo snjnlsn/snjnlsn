@@ -7,7 +7,13 @@ defmodule SnjnlsnWeb.RecordingLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :recordings, list_recordings())}
+    socket =
+      socket
+      |> assign(:recordings, list_recordings())
+      |> assign(:recording_enabled, false)
+      |> assign(:recording_active, false)
+
+    {:ok, socket}
   end
 
   @impl true
@@ -41,10 +47,16 @@ defmodule SnjnlsnWeb.RecordingLive.Index do
     {:noreply, assign(socket, :recordings, list_recordings())}
   end
 
-  # def handle_event("send-to-phx", params, socket) do
-  #   # IO.inspect(params, label: "test")
-  #   {:noreply, push_event(socket, "record", %{valueMagic: "magicValue!"})}
-  # end
+  @impl true
+  def handle_event("recording-active", _, socket),
+    do:
+      {:reply, %{answer: "recording active in live view"},
+       assign(socket, :recording_active, true)}
+
+  def handle_event("recording-enabled", _, socket),
+    do:
+      {:reply, %{answer: "recording enabled in live view"},
+       assign(socket, :recording_enabled, true)}
 
   def handle_event("recieved", audio_params, socket) do
     # IO.inspect(data, label: "raw")
@@ -58,7 +70,8 @@ defmodule SnjnlsnWeb.RecordingLive.Index do
 
   def handle_event("cannot-record", params, socket) do
     IO.inspect(params, label: "its so sad but honestly we cannot record")
-    {:noreply, socket}
+
+    {:noreply, assign(socket, recording_active: false, recording_enabled: false)}
   end
 
   defp list_recordings do

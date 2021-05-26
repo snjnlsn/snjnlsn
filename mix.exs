@@ -49,7 +49,7 @@ defmodule Snjnlsn.MixProject do
       {:phx_gen_auth, "~> 0.6", only: [:dev], runtime: false},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.15.0"},
+      {:phoenix_live_view, "~> 0.15.5"},
       {:phoenix_pubsub, "~> 2.0"},
       {:plug_cowboy, "~> 2.0"},
       {:poison, "~> 3.1"},

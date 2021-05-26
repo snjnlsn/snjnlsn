@@ -11,24 +11,34 @@ defmodule Snjnlsn.Songwriter.Recording do
     timestamps()
   end
 
-  def recording_filename(%{name: name}) do
+  def recording_filename(%{"mimeType" => "audio/webm"}) do
     # todo: make this a changeset validation
-    "#{name |> String.replace(" ", "_")}_#{DateTime.utc_now() |> DateTime.to_string()}"
+    "#{"add a name later" |> String.replace(" ", "_")}_#{
+      DateTime.utc_now() |> DateTime.to_string()
+    }.webm"
     |> Zarex.sanitize()
   end
 
-  def recording_filename(_unmatched) do
+  def recording_filename(%{"mimeType" => "audio/mp4"}) do
     # todo: make this a changeset validation
-    "#{DateTime.utc_now() |> DateTime.to_string()}"
+    "#{"add a name later" |> String.replace(" ", "_")}_#{
+      DateTime.utc_now() |> DateTime.to_string()
+    }.mp4"
     |> Zarex.sanitize()
   end
+
+  # def recording_filename(_unmatched) do
+  #   # todo: make this a changeset validation
+  #   "#{DateTime.utc_now() |> DateTime.to_string()}"
+  #   |> Zarex.sanitize()
+  # end
 
   def save(map) do
     filename = recording_filename(map)
     {:ok, filepath} = write_temp_audio(map, filename)
     {:ok, %{name: name}} = upload_audio(filepath, filename)
     {:ok, result} = insert_to_repo(name)
-    {:ok, _dont_care} = File.rm_rf(filepath)
+    # {:ok, _dont_care} = File.rm_rf(filepath)
     {:ok, result}
   end
 
@@ -43,6 +53,8 @@ defmodule Snjnlsn.Songwriter.Recording do
     {:ok, t} = Goth.fetch(Snjnlsn.Goth)
     conn = GoogleApi.Storage.V1.Connection.new(t.token)
     {:ok, env} = Application.fetch_env(:snjnlsn, __MODULE__)
+
+    IO.inspect(name, label: "we doing the correct name or na")
 
     GoogleApi.Storage.V1.Api.Objects.storage_objects_insert_simple(
       conn,
@@ -63,13 +75,13 @@ defmodule Snjnlsn.Songwriter.Recording do
   defp write_temp_audio(%{"mimeType" => "audio/webm", "data" => data}, filename) do
     IO.inspect(data, label: "\n\n data \n\n")
     "data:audio/webm;base64," <> raw = data
-    File.write!("./assets/audio/#{filename}.webm", Base.decode64!(raw))
-    {:ok, "./assets/audio/#{filename}.webm"}
+    File.write!("./assets/audio/#{filename}", Base.decode64!(raw))
+    {:ok, "./assets/audio/#{filename}"}
   end
 
   defp write_temp_audio(%{"mimeType" => "audio/mp4", "data" => data}, filename) do
     "data:audio/mp4;base64," <> raw = data
-    File.write!("./assets/audio/#{filename}.mp4", Base.decode64!(raw))
-    {:ok, "./assets/audio/#{filename}.mp4"}
+    File.write!("./assets/audio/#{filename}", Base.decode64!(raw))
+    {:ok, "./assets/audio/#{filename}"}
   end
 end
