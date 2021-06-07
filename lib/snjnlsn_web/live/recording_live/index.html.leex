@@ -11,6 +11,7 @@
 
 <div class="controls">
   <%= if @recording_enabled do %>
+      <audio autoplay controls id="audio-stream" >Error Displaying Audio Element</audio>
     <%= if @recording_active do %>
       <button type="button" id="quick-save">Quick Save</button>
       <button type="button" id="stop">Create Song</button>

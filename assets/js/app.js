@@ -99,7 +99,10 @@ const Hooks = {
                 recorder.addEventListener("start", () => {
                   hook.pushEvent("recording-active", {}, () => {
                     const quickSave = document.getElementById("quick-save"),
-                      createSong = document.getElementById("stop")
+                      createSong = document.getElementById("stop"),
+                      audio = document.getElementById("audio-stream")
+
+                    audio.srcObject = stream
 
                     quickSave.addEventListener("click", () => {
                       console.log("quickSave clicked")
